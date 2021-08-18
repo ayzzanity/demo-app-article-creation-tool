@@ -91,11 +91,10 @@ const ArticleManagementController = ({ store, form }) => {
   // DELETING ARTICLE
   const handleDeleteArticle = async (article) => {
     const params = article.id;
-    // let [successMessage, error] =
-    await store.articles['DELETE'](params);
-    // let success = await _showresultMessage(error, {
-    //   successMessage: successMessage.message
-    // });
+    let [successMessage, error] = await store.articles['DELETE'](params);
+    let success = await _showresultMessage(error, {
+      successMessage: successMessage.message
+    });
   };
 
   async function _showresultMessage(error, { successMessage }) {

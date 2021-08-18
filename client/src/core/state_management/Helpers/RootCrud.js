@@ -10,7 +10,7 @@ const ApplyRootCrud = (apiPath, self) => {
         self.state.push(data);
         self.isCreating = false;
 
-        return [{ message: 'Created!', data }, null];
+        return [{ message: 'Created', data }, null];
       } catch (error) {
         self.isCreating = false;
         return [null, error];
@@ -50,7 +50,7 @@ const ApplyRootCrud = (apiPath, self) => {
           data
         );
 
-        return [{ message: 'Updated!' }, null];
+        return [{ message: 'Updated' }, null];
       } catch (error) {
         console.log(error);
         return [null, error];
@@ -77,6 +77,8 @@ const ApplyRootCrud = (apiPath, self) => {
           1
         );
       }
+
+      return [{ message: 'Deleted', data }, null];
     })
   };
 };
