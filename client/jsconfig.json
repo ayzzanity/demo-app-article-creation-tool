@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@core_assets/*": ["./core/assets/*"],
+      "@core_modules/*": ["./core/modules/*"],
+      "@core_common/*": ["./core/common/*"],
+      "@core_routing/*": ["./core/routing/*"],
+      "@core_state_management/*": ["./core/state_management/*"],
+      "@core_data/*": ["./core/data/*"],
+      "@app_assets/*": ["./app/assets/*"],
+      "@app_modules/*": ["./app/modules/*"],
+      "@app_common/*": ["./app/common/*"],
+      "@app_routing/*": ["./app/routing/*"],
+      "@app_state_management/*": ["./app/state_management/*"],
+      "@app_data/*": ["./app/data/*"]
+    }
+  }
+}

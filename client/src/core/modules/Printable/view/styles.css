@@ -1,0 +1,90 @@
+/* ++++  PRINT +++  */
+.header {
+  display: none;
+}
+.footer {
+  display: none;
+}
+
+#header-print {
+  display: none;
+}
+@media screen {
+  #print-thead,
+  #print-tfoot {
+    display: none;
+  }
+}
+@media print {
+  html,
+  body {
+    height: initial !important;
+    overflow: initial !important;
+  }
+
+  @page {
+    size: A3;
+    margin: 15mm;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  #print-thead {
+    display: table-header-group;
+  }
+  #print-tfoot {
+    display: table-footer-group;
+  }
+
+  .header,
+  .header-space,
+  .footer,
+  .footer-space {
+    height: 45px;
+  }
+  .header-space {
+    margin-bottom: 30px;
+  }
+  .footer-space {
+    margin-top: 30px;
+  }
+  .header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    border-bottom: 1px solid;
+    padding-top: 21px;
+  }
+  .header div {
+    -ms-flex: 1; /* IE 10 */
+    flex: 1;
+  }
+  .footer {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid;
+    padding-top: 5px;
+  }
+  .footer div {
+    -ms-flex: 1; /* IE 10 */
+    flex: 1;
+  }
+  .footer-app-name,
+  .header-first-col {
+    float: left;
+  }
+  .footer-curdate,
+  .header-curdate,
+  .header-third {
+    float: right;
+    text-align: right;
+  }
+}
+
+/* -----  PRINT -----  */

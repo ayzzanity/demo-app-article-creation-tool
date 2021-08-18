@@ -1,0 +1,126 @@
+variables:
+  PROJECT_FOLDER: "/var/www/start-template"
+  SCRIPT_DIR: /var/www/scripts
+
+cache: &global_cache
+  key: "$CI_BUILD_REF_NAME"
+  paths:
+    - client/node_modules/
+    - server/node_modules/
+    - server/.env
+
+# ===============================
+# Stages
+# ===============================
+stages:
+  - setup
+  - build
+  - deploy
+
+# ===============================
+# Before Script for Server to cache
+# ===============================
+
+before_script: # Edits NODE_ENV on .env file depending on what branch is pushed
+  - |
+    ([ -d "./client/node_modules" ] || cd client && npm install) & ([ -d "./server/node_modules" ] || cd server && npm install);
+    ([ -d "$PROJECT_FOLDER/$CI_BUILD_REF_NAME" ]) || sudo mkdir -p $PROJECT_FOLDER/$CI_BUILD_REF_NAME;
+    ([ -d "./server/process.json" ] || $SCRIPT_DIR/custom_env.sh server/) & $SCRIPT_DIR/process.sh server/
+    cat $SCRIPT_DIR/custom_env.sh
+    cat ./server/.env
+
+# ===============================
+# Base Configuration
+# ===============================
+
+# prepare env
+.database_setup:
+  stage: setup
+  script:
+    # - echo 'done'
+    - cd ./server
+    - npm run db-flush
+  cache:
+    <<: *global_cache
+    policy: push
+
+# build dist
+.build_client:
+  stage: build
+  script:
+    - cd ./client;
+    - CI=false npm run build
+  cache:
+    <<: *global_cache
+    policy: pull
+  artifacts:
+    paths:
+      - client/build/
+
+.deploy:
+  stage: deploy
+  script:
+    - sudo rm -rf $PROJECT_FOLDER/$CI_BUILD_REF_NAME/build
+    - sudo cp -r ./* $PROJECT_FOLDER/$CI_BUILD_REF_NAME
+    - sudo rm -rf ./*
+    - cd $PROJECT_FOLDER/$CI_BUILD_REF_NAME/server
+    - pm2 start process.json
+  cache:
+    <<: *global_cache
+    policy: pull
+
+# ===============================
+# Development Runner
+# ===============================
+
+database_setup:dev:
+  extends: .database_setup
+  tags:
+    - dev
+    - predev
+  only:
+    - predev
+    - dev
+
+build_client:dev:
+  extends: .build_client
+  tags:
+    - dev
+    - predev
+  only:
+    - predev
+    - dev
+
+deploy:dev:
+  extends: .deploy
+  tags:
+    - dev
+    - predev
+  only:
+    - predev
+    - dev
+
+# ===============================
+# Production Runner
+# ===============================
+
+database_setup:master:
+  extends: .database_setup
+  tags:
+    - master
+  only:
+    - master
+
+build_client:master:
+  extends: .build_client
+  tags:
+    - master
+  only:
+    - master
+
+deploy:master:
+  extends: .deploy
+  tags:
+    - master
+  only:
+    - master

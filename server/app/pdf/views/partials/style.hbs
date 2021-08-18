@@ -1,0 +1,179 @@
+<style>
+	* {
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	}
+
+	body {
+		height: 100%;
+		margin: 0;
+		padding: 0;
+	}
+
+	.body {
+		margin-top: 24px;
+	}
+
+	@page {
+		margin: 72px 72px 138.24px 72px;
+	}
+
+	.page {
+		background: white;
+		display: block;
+		margin: 0 auto;
+		/* padding: 72px 72px 138.24px 72px; */
+		/* Size = A4 */
+		width: 21cm;
+		height: 29.7cm;
+		position: relative;
+	}
+
+	#title {
+		text-align: center;
+	}
+
+	.vertical-center {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.header {
+		display: flex;
+		width: 100%;
+		min-height: 90px;
+		position: relative;
+		justify-content: space-between;
+	}
+
+	.header .left {
+		min-width: 250px;
+		background-position-y: -4px;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-image: url('{{ assets }}/title_bg.png');
+	}
+
+	.header .left h2 {
+		font-weight: 800;
+		color: rgb(70, 70, 70);
+		text-transform: uppercase;
+	}
+
+	.header .right {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+	}
+
+	.header .right>div {
+		height: inherit;
+		margin-bottom: 12px;
+	}
+
+	.header .right>* {
+		margin: 0;
+		text-align: right;
+	}
+
+	.header .right>h2 {
+		color: #9e0a0f;
+		margin-top: -11px;
+		font-weight: 700;
+	}
+
+	.header .right .logo {
+		height: 40px;
+	}
+
+	.header-divider {
+		height: 5px;
+		width: 100%;
+		margin-top: 2px;
+		border-radius: 5px;
+		background-color: #9e0a0f;
+		box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+	}
+
+	.ant-table {
+		margin-top: 8px;
+		margin-bottom: 14px;
+	}
+
+	.ant-table table>thead>tr>th.t-sub-header {
+		color: #ece6e1;
+	}
+
+	.ant-table table>thead>tr>th {
+		color: #FFF;
+		padding: 5px 0;
+		font-size: 12px;
+		font-weight: 400;
+		text-align: center;
+		background-color: #4C3D31;
+		border-bottom: none !important;
+	}
+
+	.ant-table table>tbody>tr:not(.header):nth-child(even) {
+		background: #EBEBEB;
+	}
+
+	.ant-table table>tbody>tr.total-row {
+		background-color: #dbcfc8 !important;
+		font-weight: bold !important;
+	}
+
+	.ant-table table>tbody>tr.payment-type-row {
+		background-color: #ffecdf !important;
+		color: #d27637 !important;
+		font-weight: bold !important;
+	}
+
+	.ant-table table>tbody>tr.table-row-comparison td {
+		background-color: #f0eff0 !important;
+		font-weight: bold;
+	}
+
+	.ant-table table>tbody>tr>td {
+		border: none;
+		padding: 4px;
+		font-size: 11px
+	}
+
+	.align-text-left {
+		text-align: left;
+	}
+
+	.align-text-center {
+		text-align: center;
+	}
+
+	.align-text-right {
+		text-align: right;
+	}
+
+	@media print {
+		table {
+			page-break-before: avoid;
+			break-inside: avoid;
+			page-break-after: auto;
+		}
+
+		tr {
+			page-inside: avoid;
+			break-after: auto;
+		}
+
+		table tfoot thead {
+			break-inside: auto;
+			overflow: hidden;
+		}
+
+		.page-break-after {
+			page-break-after: auto;
+			break-inside: avoid;
+		}
+	}
+
+
+</style>

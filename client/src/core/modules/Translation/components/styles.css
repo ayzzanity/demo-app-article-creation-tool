@@ -1,0 +1,3 @@
+.border-green {
+  border: 1px solid var(--quaternary-theme-color) !important;
+}

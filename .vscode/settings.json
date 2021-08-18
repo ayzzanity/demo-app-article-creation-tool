@@ -1,0 +1,8 @@
+{
+  "editor.formatOnSave": true,
+  "html.format.wrapLineLength": 220,
+  "prettier.printWidth": 160,
+  "discord.enabled": true,
+  "editor.tabSize": 2,
+  "prettier.semi": false
+}

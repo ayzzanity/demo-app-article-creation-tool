@@ -1,0 +1,64 @@
+{
+  "name": "temp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./test/*.test.js --exit",
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "db:drop": "sequelize db:drop",
+    "db:create": "sequelize db:create",
+    "migrate:undo": "sequelize db:migrate:undo:all",
+    "migrate": "sequelize db:migrate",
+    "seed": "sequelize db:seed:all",
+    "db-flush": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all"
+  },
+  "author": "",
+  "license": "ISC",
+  "nodemonConfig": {
+    "ignore": [
+      "app/app_source/*",
+      "app/app_source_zip/*",
+      "app/app_images/*",
+      "app/app_module_files/*",
+      "app/translations/*"
+    ]
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-session": "^1.4.0",
+    "cors": "^2.8.5",
+    "cron": "^1.8.2",
+    "excel4node": "^1.7.2",
+    "express": "^4.17.1",
+    "handlebars": "^4.7.7",
+    "helmet": "^4.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.2.5",
+    "node-loopie": "^1.0.4",
+    "nodemailer": "^6.4.14",
+    "puppeteer": "^9.1.1",
+    "randomatic": "^3.1.1",
+    "sequelize": "^6.3.5",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "custom-env": "^2.0.1",
+    "eslint": "^7.27.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "jest": "^26.6.2",
+    "mocha": "^8.4.0",
+    "nodemon": "^2.0.6",
+    "prettier": "^2.3.0",
+    "sequelize-cli": "^6.2.0"
+  }
+}

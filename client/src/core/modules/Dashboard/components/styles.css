@@ -1,0 +1,36 @@
+.dashboard-hr-num {
+  font-size: 20px;
+}
+.tertiary {
+  background: var(--tertiary-theme-color);
+}
+.primary {
+  background: var(--main-theme-color);
+}
+.secondary {
+  background: var(--secondary-theme-color);
+}
+.reds {
+  background: #ff0000;
+}
+.rd-10 {
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 0px solid #000000;
+}
+.nti {
+  color: #c0bfbf;
+}
+.main-left-border {
+  border-left: 3px solid var(--main-theme-color) !important;
+}
+.secondary-left-border {
+  border-left: 3px solid var(--secondary-theme-color) !important;
+}
+.tertiary-left-border {
+  border-left: 3px solid var(--tertiary-theme-color) !important;
+}
+.quaternary-left-border {
+  border-left: 3px solid var(--quaternary-theme-color) !important;
+}

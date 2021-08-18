@@ -1,0 +1,219 @@
+{{!-- uses the twit mock object from mock API --}}
+<div class="body">
+
+	<span style="display: block;"><strong>Date: </strong>{{ date }}</span>
+	<span style="display: block;"><strong>Local Unit: </strong>{{ local_unit_name }}</span>
+
+	{{!-- Umsatzkonten --}}
+	<div class="ant-table ant-table-small ant-table-bordered">
+		<div class="ant-table-container">
+			<div class="ant-table-content">
+				<table>
+					<thead>
+						<tr>
+							<th rowspan="2">UMSATZKONTEN</th>
+							<th colspan="2">GRAND TOTAL</th>
+						</tr>
+						<tr>
+							<th class="t-sub-header" style="border-right: none;">Quantity</th>
+							<th class="t-sub-header">Amount</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#if data}}
+							{{#with data }}
+								{{#each umsatzkonten as | account | }}
+									{{#if account.isStatic }}
+										{{#if account.isTitle}}
+											<tr class="payment-type-row">
+												<td colspan="3">{{ account.name }}</td>
+											</tr>
+										{{else}}
+											<tr class="total-row">
+												<td>{{ account.name }}</td>
+												<td class="align-text-right">{{account.qty}}</td>
+												<td class="align-text-right">{{account.amount}}</td>
+											</tr>
+										{{/if}}
+									{{else}}
+										<tr>
+											<td>{{ account.name }}</td>
+											<td class="align-text-right">{{account.qty}}</td>
+											<td class="align-text-right">{{account.amount}}</td>
+										</tr>
+									{{/if}}
+								{{/each }}
+							{{/with}}
+						{{/if}}
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<hr>
+
+	{{!-- Zahlungskonten --}}
+	<div class="ant-table ant-table-small ant-table-bordered page-break-after">
+		<div class="ant-table-container">
+			<div class="ant-table-content">
+				<table>
+					<thead>
+						<tr>
+							<th rowspan="2">ZAHLUNGSKONTEN</th>
+							<th colspan="2">GRAND TOTAL</th>
+						</tr>
+						<tr>
+							<th colspan="2" class="t-sub-header">Amount</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#if data}}
+							{{#with data }}
+								{{#each zahlungskonten as | account | }}
+									{{#if account.isStatic }}
+										{{#if account.isTitle}}
+											<tr class="payment-type-row">
+												<td colspan="2">{{ account.name }}</td>
+											</tr>
+										{{else}}
+											<tr class="total-row">
+												<td>{{ account.name }}</td>
+												<td class="align-text-right">{{account.amount}}</td>
+											</tr>
+										{{/if}}
+									{{else}}
+										<tr>
+											<td>{{ account.name }}</td>
+											<td class="align-text-right">{{account.amount}}</td>
+										</tr>
+									{{/if}}
+								{{/each}}
+							{{/with}}
+						{{/if}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+
+	<div style="width: 100%; background-color: #F0EFF0; padding: 4px; font-size: 11px; display: flex; justify-content: space-between;">
+		<strong>COMPARISON</strong>
+		<span>
+			{{#ifCond data.comparison '!==' 0 }}
+				<strong style="color: red;">{{data.comparison}}</strong>
+				{{else}}
+					<strong>{{data.comparison}}</strong>
+			{{/ifCond}}
+		</span>
+	</div>
+
+	<hr>
+
+	{{!-- Eihnnamen/Ausgaben --}}
+	<div class="ant-table ant-table-small ant-table-bordered page-break-after">
+		<div class="ant-table-container">
+			<div class="ant-table-content">
+				<table>
+					<thead>
+						<tr>
+							<th rowspan="2">EIHNNAMEN/AUSGABEN</th>
+							<th colspan="2">GRAND TOTAL</th>
+						</tr>
+						<tr>
+							<th class="t-sub-header" style="border-right: none;">Quantity</th>
+							<th class="t-sub-header">Amount</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#if data}}
+							{{#with data }}
+								{{#each incomeAndExpenseRow as | incomeAndExpense | }}
+									<tr>
+										<td>{{ incomeAndExpense.name }}</td>
+										<td class="align-text-right">{{incomeAndExpense.qty}}</td>
+										<td class="align-text-right">{{incomeAndExpense.amount}}</td>
+									</tr>
+								{{/each}}
+							{{/with}}
+						{{/if}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<hr>
+
+	{{!-- CALCULATIONS TABLE --}}
+	<div class="ant-table ant-table-small ant-table-bordered bg page-break-after">
+		<div class="ant-table-container">
+			<div class="ant-table-content">
+				<table>
+					<thead>
+						<tr>
+							<th>BUSINESS UNITS</th>
+							{{#if data}}
+								{{#with data }}
+									{{#each BusinessUnits as | BusinessUnit | }}
+										<th>{{BusinessUnit.business_unit_name}}</th>
+									{{/each}}
+								{{/with}}
+							{{/if}}
+						</tr>
+
+
+					</thead>
+					<tbody>
+						{{#if data}}
+							{{#with data }}
+								{{#each calculations as | calculation | }}
+
+									<tr>
+										<td>{{ calculation.name }}</td>
+										{{#each calculation.values as | value | }}
+											<td class="align-text-right">{{value}}</td>
+										{{/each}}
+									</tr>
+								{{/each}}
+							{{/with}}
+						{{/if}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<hr>
+
+	{{!-- COMMENTS --}}
+	<div class="ant-table ant-table-small ant-table-bordered page-break-after">
+		<div class="ant-table-container">
+			<div class="ant-table-content">
+				<table>
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>Business Unit</th>
+							<th>Comment</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#if data}}
+							{{#with data }}
+								{{#each Comments as | comment | }}
+									<tr>
+										<td>{{formatDate comment.createdAt }} </td>
+										<td>{{comment.business_unit_name}}</td>
+										<td>{{comment.comment}}</td>
+									</tr>
+								{{/each}}
+							{{/with}}
+						{{/if}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

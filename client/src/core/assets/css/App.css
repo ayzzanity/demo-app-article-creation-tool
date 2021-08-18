@@ -1,0 +1,13 @@
+html,
+body,
+#root,
+.App {
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+svg {
+  vertical-align: baseline !important;
+}

@@ -1,0 +1,17 @@
+{
+  "name": "start-tempalte",
+  "version": "1.0.0",
+  "description": "Documentation to be updated...",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "cd client && npm i && cd ../server && npm i && cd ../"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.exco-apps.ch/exact-construct-gmbh/start-tempalte.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

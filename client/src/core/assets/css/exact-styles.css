@@ -1,0 +1,106 @@
+:root {
+  --main-theme-color: #3283a8;
+  --secondary-theme-color: #497cb3;
+  --tertiary-theme-color: #000000;
+  --quaternary-theme-color: #5cd8c3;
+  --tab-card-theme-color: #d3efef;
+  --tab-card-text-color: #4c5050;
+  --card-roundness: 20px;
+}
+
+/* "id": 3,
+"project_id": 1,
+"main_theme_color": "#d03030",
+"secondary_theme_color": "#8a0c0c",
+"tertiary_theme_color": "#c61f1f",
+"quaternary_theme_color": "#d31919",
+"tab_card_theme_color": "#d96161",
+"tab_card_text_color": "#d72626",
+"createdAt": "2021-06-18T02:59:34.000Z",
+"updatedAt": "2021-06-18T02:59:34.000Z" */
+
+.exact-small-text {
+  color: var(--main-theme-color);
+}
+
+.exact-title > h1.ant-typography {
+  color: var(--main-theme-color);
+}
+.exact-title > h2.ant-typography {
+  color: var(--main-theme-color);
+}
+.exact-title > h3.ant-typography {
+  color: var(--main-theme-color);
+}
+.exact-title > h4.ant-typography {
+  color: var(--main-theme-color);
+}
+.exact-title > h5.ant-typography {
+  color: var(--main-theme-color);
+}
+.exact-title > h6.ant-typography {
+  color: var(--main-theme-color);
+}
+
+.exact-text > span.ant-typography {
+  color: var(--main-theme-color);
+}
+
+.exact-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.exact-virtualize-table-stripe-color {
+  background-color: #f2f2f2;
+}
+
+.exact-virtualize-table {
+  background-color: #fff;
+}
+
+.ant-card.ant-card-bordered.exact-card.shadow-sm {
+  border-radius: 2px !important;
+}
+
+#exact-search {
+  background-color: #fff;
+}
+
+span.ant-input-affix-wrapper.shadow-sm.exact-search-input {
+  width: 100vw;
+  background-color: #fff;
+}
+
+.exact-dashboard-box {
+  padding: 8px 20px;
+}
+.exact-modal {
+  width: 50% !important;
+}
+.exact-modal-80 {
+  width: 80% !important;
+}
+.exact-mt-50 {
+  margin-top: 50px;
+}
+.exact-rd-10 {
+  border-radius: 20px 20px 20px 20px;
+  -moz-border-radius: 20px 20px 20px 20px;
+  -webkit-border-radius: 20px 20px 20px 20px;
+  border: 0px solid #000000;
+}
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 600px) {
+  /* For tablets: */
+  .exact-modal {
+    width: 100% !important;
+  }
+}
+@media only screen and (max-width: 900px) {
+  /* For tablets: */
+  .exact-modal {
+    width: 80% !important;
+  }
+}

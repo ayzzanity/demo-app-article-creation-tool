@@ -1,0 +1,6 @@
+client/build
+node_modules
+
+server/storage
+server/translations
+*.logs

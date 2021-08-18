@@ -1,0 +1,61 @@
+thead[class*='ant-table-thead'] th {
+  border-bottom: 2px solid var(--main-theme-color);
+}
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: #f5f5f5;
+}
+
+section.ant-layout.ant-layout-has-sider {
+  height: 100%;
+}
+
+section.ant-layout.site-layout {
+  overflow-y: auto;
+}
+
+.ant-checkbox-inner {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 16px;
+  height: 16px;
+  direction: ltr;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px !important;
+  border-collapse: separate;
+  transition: all 0.3s;
+}
+
+.ant-pagination-item-active {
+  background: var(--main-theme-color);
+  color: #fff;
+}
+
+li.ant-menu-submenu.ant-menu-submenu-vertical.exact-menu {
+  width: 100%;
+}
+
+.ant-modal-content {
+  border-radius: var(--card-roundness) !important;
+}
+
+.ant-modal-header {
+  border-radius: var(--card-roundness) var(--card-roundness) 0 0 !important;
+}
+
+.ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap,
+.ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-wrap {
+  border-bottom: 1px solid #fff !important;
+}
+
+.ant-tabs-card > .ant-tabs-nav .ant-tabs-tab-active,
+.ant-tabs-card > div > .ant-tabs-nav .ant-tabs-tab-active {
+  background: var(--tab-card-theme-color);
+}
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: var(--tab-card-text-color);
+}
