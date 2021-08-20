@@ -1,5 +1,5 @@
 import { types } from 'mobx-state-tree';
-import { ArticlesModel } from '@app_modules/Article/model';
+import { ArticlesModel } from '@app_modules/ArticleManagement/model';
 import ApplyRootCrud from '@core_state_management/Helpers/RootCrud';
 
 const API_PATH = '/api/articles';

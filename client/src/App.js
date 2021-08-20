@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 
 /**APP IMPORTS */
-import { ArticleManagement } from '@app_modules/Article/view';
+import { ArticleManagement } from '@app_modules/ArticleManagement/view';
 import { DisplayArticles, ViewArticle } from '@app_modules/DisplayArticles/view';
 
 /**APP CORE */

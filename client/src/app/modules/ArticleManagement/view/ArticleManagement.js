@@ -8,7 +8,7 @@ import {
   ArticleTable,
   ArticleView,
   DeleteConfirmation
-} from '@app_modules/Article/components';
+} from '@app_modules/ArticleManagement/components';
 
 function ArticleManagement() {
   const [form] = Form.useForm();

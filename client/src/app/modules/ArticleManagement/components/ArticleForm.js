@@ -3,8 +3,8 @@ import { Modal, Space, Button, Col, Form, Input, Row, Select, Image } from 'antd
 import { inject, observer } from 'mobx-react';
 
 /**ARTICLE IMPORTS */
-import { ArticleController } from '@app_modules/Article/controller';
-import { TextEditor } from '@app_modules/Article/components';
+import { ArticleController } from '@app_modules/ArticleManagement/controller';
+import { TextEditor } from '@app_modules/ArticleManagement/components';
 
 /**CORE IMPORTS */
 import { ExactText } from '@core_common/components';

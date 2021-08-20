@@ -2,7 +2,7 @@ import { Modal, Space, Typography, Divider, Image } from 'antd';
 import { inject, observer } from 'mobx-react';
 
 /**ARTICLE IMPORTS */
-import { ArticleController } from '@app_modules/Article/controller';
+import { ArticleController } from '@app_modules/ArticleManagement/controller';
 
 /**CORE IMPORTS */
 import { ExactText } from '@core_common/components';

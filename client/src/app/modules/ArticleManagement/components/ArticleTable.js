@@ -4,7 +4,7 @@ import { EditFilled, EyeOutlined, DeleteOutlined } from '@ant-design/icons';
 import { inject, observer } from 'mobx-react';
 
 /**ARTICLE IMPORTS */
-import { ArticleController } from '@app_modules/Article/controller';
+import { ArticleController } from '@app_modules/ArticleManagement/controller';
 
 function ArticleTable({ store, form }) {
   const { Text } = Typography;

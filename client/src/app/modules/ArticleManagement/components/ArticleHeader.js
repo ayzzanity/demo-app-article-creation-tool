@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import { PlusOutlined } from '@ant-design/icons';
 
 /**ARTICLE IMPORTS */
-import { ArticleController } from '@app_modules/Article/controller';
+import { ArticleController } from '@app_modules/ArticleManagement/controller';
 
 /**CORE IMPORTS */
 import { ExactTitle } from '@core_common/components';

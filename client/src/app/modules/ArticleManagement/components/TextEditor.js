@@ -4,7 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import './styles.css';
 
 /**ARTICLE IMPORTS */
-import { ArticleController } from '@app_modules/Article/controller';
+import { ArticleController } from '@app_modules/ArticleManagement/controller';
 
 const TextEditor = ({ store }) => {
   const { handleArticleContent } = ArticleController({ store });

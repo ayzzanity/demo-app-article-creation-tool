@@ -1,4 +1,4 @@
-import { ArticlesState, ArticleUtilities } from '@app_modules/Article/model';
+import { ArticlesState, ArticleUtilities } from '@app_modules/ArticleManagement/model';
 import { DisplayState } from '@app_modules/DisplayArticles/model';
 import { types } from 'mobx-state-tree';
 
