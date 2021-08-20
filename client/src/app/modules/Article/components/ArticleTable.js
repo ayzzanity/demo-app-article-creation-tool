@@ -3,16 +3,17 @@ import { Button, Divider, Space, Table, Typography, Popconfirm } from 'antd';
 import { EditFilled, EyeOutlined, DeleteOutlined } from '@ant-design/icons';
 import { inject, observer } from 'mobx-react';
 
-import { ArticleController } from '../controller';
-import ArticleView from './ArticleView';
-/**CORE IMPORTS */
-//import './styles.css';
-
-const { Text } = Typography;
+/**ARTICLE IMPORTS */
+import { ArticleController } from '@app_modules/Article/controller';
 
 function ArticleTable({ store, form }) {
-  const { getArticles, handleToggleShowFormModal, handleToggleShowViewModal, handleDeleteArticle } =
-    ArticleController({ store, form });
+  const { Text } = Typography;
+  const {
+    getArticles,
+    handleToggleShowFormModal,
+    handleToggleShowViewModal,
+    handleToggleShowDeleteModal
+  } = ArticleController({ store, form });
 
   // eslint-disable-next-line
   useEffect(getArticles, []);
@@ -102,16 +103,19 @@ function ArticleTable({ store, form }) {
       title: 'Action'.toUpperCase(),
       dataIndex: 'action',
       responsive: ['sm', 'md', 'lg', 'xl'],
+      fixed: 'right',
+      width: 100,
       shouldCellUpdate: (prev, next) => false,
       render: (value, articleData) => {
         return (
-          <>
+          <Space>
             <Button
               onClick={() => {
                 handleToggleShowFormModal(articleData, true);
               }}
               icon={<EditFilled />}
               type="link"
+              style={{ color: '#009174' }}
             />
             <Button
               onClick={() => {
@@ -124,57 +128,36 @@ function ArticleTable({ store, form }) {
               placement="topRight"
               title={`Are you sure to delete this Article?`}
               onConfirm={() => {
-                handleDeleteArticle(articleData);
+                handleToggleShowDeleteModal(articleData);
               }}
               okText="Yes"
               cancelText="No"
             >
               <Button icon={<DeleteOutlined />} type="link" style={{ color: '#9B2311' }} />
             </Popconfirm>
-          </>
+          </Space>
         );
       }
     }
   ];
 
-  const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      //let hasChecked = selectedRows.length > 0;
-
-      //setIsDeleteVisible(hasChecked);
-
-      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-    },
-    getCheckboxProps: (record) => ({
-      disabled: record.name === 'Disabled Article',
-      firstName: record.name
-    })
-  };
-
   return (
-    <>
-      <Table
-        loading={store.articles.loading}
-        className="exact-table shadow-sm bg-white p-3"
-        size="small"
-        rowSelection={{
-          type: 'checkbox',
-          ...rowSelection
-        }}
-        columns={columns}
-        dataSource={store.articles.state.toJSON()}
-        pagination={{
-          position: ['bottomCenter'],
-          hideOnSinglePage: true,
-          pageSize: 5,
-          responsive: true,
-          showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} articles`,
-          showSizeChanger: false,
-          total: store.articles.toJSON().total
-        }}
-      />
-      <ArticleView />
-    </>
+    <Table
+      loading={store.articles.loading}
+      className="exact-table shadow-sm bg-white p-3"
+      size="small"
+      columns={columns}
+      dataSource={store.articles.state.toJSON()}
+      pagination={{
+        position: ['bottomCenter'],
+        hideOnSinglePage: true,
+        pageSize: 10,
+        responsive: true,
+        showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} articles`,
+        showSizeChanger: false,
+        total: store.articles.toJSON().total
+      }}
+    />
   );
 }
 

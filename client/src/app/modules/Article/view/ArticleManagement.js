@@ -1,7 +1,14 @@
 import React from 'react';
 import { Form } from 'antd';
-import ArticleTable from '../components/ArticleTable';
-import ArticleHeader from '../components/ArticleHeader';
+
+/**ARTICLE IMPORTS */
+import {
+  ArticleForm,
+  ArticleHeader,
+  ArticleTable,
+  ArticleView,
+  DeleteConfirmation
+} from '@app_modules/Article/components';
 
 function ArticleManagement() {
   const [form] = Form.useForm();
@@ -9,6 +16,9 @@ function ArticleManagement() {
     <div>
       <ArticleHeader form={form} />
       <ArticleTable form={form} />
+      <ArticleForm form={form} />
+      <ArticleView />
+      <DeleteConfirmation form={form} />
     </div>
   );
 }

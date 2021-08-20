@@ -1,7 +1,12 @@
 import { Modal, Space, Typography, Divider, Image } from 'antd';
 import { inject, observer } from 'mobx-react';
-import { ArticleController } from '../controller';
+
+/**ARTICLE IMPORTS */
+import { ArticleController } from '@app_modules/Article/controller';
+
+/**CORE IMPORTS */
 import { ExactText } from '@core_common/components';
+
 const ArticleView = ({ store }) => {
   const { Text } = Typography;
   const { singleState } = store.articles;
@@ -32,7 +37,6 @@ const ArticleView = ({ store }) => {
         </Space>
         <Space direction="vertical">
           <Text type="secondary">Content</Text>
-
           <div dangerouslySetInnerHTML={{ __html: singleState.content }} />
         </Space>
         <Space direction="horizontal">

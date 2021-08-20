@@ -4,6 +4,7 @@ const ArticleUtilities = types
   .model('ArticleUtilities', {
     showFormModal: types.optional(types.boolean, false),
     showViewModal: types.optional(types.boolean, false),
+    showDeleteModal: types.optional(types.boolean, false),
     isUpdatingArticle: types.optional(types.boolean, false),
     articleId: types.optional(types.number, 0),
     DEFAULT_IMG: types.optional(
@@ -18,6 +19,9 @@ const ArticleUtilities = types
     },
     setToggleShowViewModal() {
       self.showViewModal = !self.showViewModal;
+    },
+    setToggleShowDeleteModal() {
+      self.showDeleteModal = !self.showDeleteModal;
     },
     setToggleUpdatingArticle(isUpdating) {
       self.isUpdatingArticle = isUpdating;

@@ -7,7 +7,8 @@ const ArticleManagementController = ({ store, form }) => {
     setToggleUpdatingArticle,
     setArticleId,
     setToggleShowFormModal,
-    setToggleShowViewModal
+    setToggleShowViewModal,
+    setToggleShowDeleteModal
   } = store.ArticleUtilities;
   const { setViewArticle, setImageHeader, setContent } = store.articles.singleState;
   //GET ARTICLES
@@ -22,6 +23,7 @@ const ArticleManagementController = ({ store, form }) => {
   const handleToggleShowFormModal = (article, isUpdating = false) => {
     if (isUpdating) {
       form.setFieldsValue(article);
+      setViewArticle(article);
       setContent(article.content);
       setImageHeader(article.imageHeader);
       setArticleId(article.id);
@@ -41,16 +43,22 @@ const ArticleManagementController = ({ store, form }) => {
     setContent(article.content);
     article.Users && store.users.single.setUser(article.Users);
   };
+  //TOGGLE SHOW DELETE MODAL
+  const handleToggleShowDeleteModal = (article) => {
+    setToggleShowDeleteModal();
+    setViewArticle(article);
+    article.Users && store.users.single.setUser(article.Users);
+  };
   //ONCHANGE FORM FIELD
   const handleChangeForm = (fieldData) => {
-    if (fieldData[0].name[0] === 'imageHeader') {
-      setImageHeader(fieldData[0].value);
-    }
+    console.log(fieldData);
+    try {
+      fieldData[0].name[0] === 'imageHeader' && setImageHeader(fieldData[0].value);
+    } catch (e) {}
   };
   //ONCHANGE CONTENT FIELD
   const handleArticleContent = (articleContent) => {
-    console.log(articleContent);
-    articleContent && store.articles.singleState.setContent(articleContent);
+    articleContent && setContent(articleContent);
   };
 
   //CREATE/UPDATE ARTICLE
@@ -61,23 +69,12 @@ const ArticleManagementController = ({ store, form }) => {
       key: 'creatingArticle'
     });
     let date = _getDate();
-    const params = isUpdating
-      ? [
-          articleId,
-          {
-            ...values,
-            content: store.articles.singleState.content,
-            publishDate: values.status === 'Draft' ? 'N/A' : `${date}`
-          }
-        ]
-      : [
-          {
-            ...values,
-            content: store.articles.singleState.content,
-            publishDate: values.status === 'Draft' ? 'N/A' : `${date}`
-          }
-        ];
-    console.log(params);
+    const dataObject = {
+      ...values,
+      content: store.articles.singleState.content,
+      publishDate: values.status === 'Draft' ? 'N/A' : `${date}`
+    };
+    const params = isUpdating ? [articleId, dataObject] : [dataObject];
     let [successMessage, error] = await store.articles[isUpdating ? 'UPDATE' : 'CREATE'](...params);
     let success = await _showresultMessage(error, {
       successMessage: successMessage.message
@@ -85,16 +82,23 @@ const ArticleManagementController = ({ store, form }) => {
 
     if (success) {
       form.resetFields();
-      store.ArticleUtilities.setToggleShowFormModal();
+      setToggleShowFormModal();
     }
   };
   // DELETING ARTICLE
-  const handleDeleteArticle = async (article) => {
-    const params = article.id;
-    let [successMessage, error] = await store.articles['DELETE'](params);
-    let success = await _showresultMessage(error, {
-      successMessage: successMessage.message
-    });
+  const handleDeleteArticle = async (values, articleId) => {
+    if (values.confirmation === 'CONFIRM') {
+      let [successMessage, error] = await store.articles['DELETE'](articleId);
+      let success = await _showresultMessage(error, {
+        successMessage: successMessage.message
+      });
+      if (success) {
+        form.resetFields();
+        setToggleShowDeleteModal();
+      }
+    } else {
+      message.error("Please enter 'CONFIRM' to continue!");
+    }
   };
 
   async function _showresultMessage(error, { successMessage }) {
@@ -114,8 +118,10 @@ const ArticleManagementController = ({ store, form }) => {
     let dd = String(today.getDate()).padStart(2, '0');
     let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     let yyyy = today.getFullYear();
+    let hh = String(today.getHours()).padStart(2, '0');
+    let nn = String(today.getMinutes()).padStart(2, '0');
 
-    today = `${mm}/${dd}/${yyyy}`;
+    today = `${mm}/${dd}/${yyyy} ${hh}:${nn}`;
     return today;
   }
   return {
@@ -126,7 +132,8 @@ const ArticleManagementController = ({ store, form }) => {
     handleCreatingArticle,
     handleDeleteArticle,
     handleChangeForm,
-    handleArticleContent
+    handleArticleContent,
+    handleToggleShowDeleteModal
   };
 };
 

@@ -1,3 +1,5 @@
+import ArticlesModel from './ArticlesModel';
 import ArticlesState from './ArticlesState';
+import ArticleUtilities from './ArticleUtilities';
 
-export { ArticlesState };
+export { ArticlesModel, ArticlesState, ArticleUtilities };

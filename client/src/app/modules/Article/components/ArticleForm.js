@@ -1,23 +1,23 @@
 import React, { useEffect } from 'react';
 import { Modal, Space, Button, Col, Form, Input, Row, Select, Image } from 'antd';
 import { inject, observer } from 'mobx-react';
-import { ArticleController } from '../controller';
-import TextEditor from './TextEditor';
+
+/**ARTICLE IMPORTS */
+import { ArticleController } from '@app_modules/Article/controller';
+import { TextEditor } from '@app_modules/Article/components';
 
 /**CORE IMPORTS */
 import { ExactText } from '@core_common/components';
 import { required } from '@core_common/antdhelpers/helperfunctions';
-import { TWO_GRID } from '@core_common/antdhelpers/constants';
+import { TWO_GRID_TWOTHIRD, TWO_GRID_ONETHIRD } from '@core_common/antdhelpers/constants';
 
 function ArticleForm({ store, form }) {
   const { Option } = Select;
   const { showFormModal, DEFAULT_IMG } = store.ArticleUtilities;
   const { isCreating } = store.articles;
   const { getUsers, handleToggleShowFormModal, handleCreatingArticle, handleChangeForm } =
-    ArticleController({
-      store,
-      form
-    });
+    ArticleController({ store, form });
+
   useEffect(() => {
     getUsers();
   }, []);
@@ -41,6 +41,7 @@ function ArticleForm({ store, form }) {
           name="control-hooks"
           layout="vertical"
           initialValues={{
+            title: '',
             status: 'Draft',
             imageHeader: '',
             user_article_id: store.login.id
@@ -50,18 +51,18 @@ function ArticleForm({ store, form }) {
         >
           <div id="article">
             <Row gutter={[16, 0]}>
-              <Col {...TWO_GRID}>
+              <Col {...TWO_GRID_TWOTHIRD}>
                 <Form.Item
                   className="w-100"
                   name="title"
                   label="Article Title"
-                  rules={[required('Please enter a title!')]}
+                  //rules={[required('Please enter a title!')]}
                 >
-                  <Input className="w-100" placeholder="Article Title" />
+                  <Input placeholder="Article Title" />
                 </Form.Item>
               </Col>
-              <Col {...TWO_GRID}>
-                <Form.Item className="w-100" name="status" label="Status">
+              <Col {...TWO_GRID_ONETHIRD}>
+                <Form.Item name="status" label="Status">
                   <Select>
                     <Option key="draft" value="Draft">
                       Draft
@@ -73,8 +74,8 @@ function ArticleForm({ store, form }) {
                   </Select>
                 </Form.Item>
               </Col>
-              <Col {...TWO_GRID}>
-                <Form.Item name="content" label="Content">
+              <Col {...TWO_GRID_TWOTHIRD}>
+                <Form.Item name="content" label="Content" className="w-200">
                   {/* <Input.TextArea
                     className="w-100"
                     placeholder="Content"
@@ -83,11 +84,11 @@ function ArticleForm({ store, form }) {
                   <TextEditor />
                 </Form.Item>
               </Col>
-              <Col {...TWO_GRID}>
+              <Col {...TWO_GRID_ONETHIRD}>
                 <Form.Item
                   name="user_article_id"
                   label="Assigned User"
-                  rules={[required('Please assign a user!')]}
+                  // rules={[required('Please assign a user!')]}
                 >
                   <Select placeholder="Please select type" showSearch={true}>
                     {store.users.state.map((user) => (
@@ -98,12 +99,12 @@ function ArticleForm({ store, form }) {
                   </Select>
                 </Form.Item>
                 <Form.Item name="imageHeader" label="Image Header Link">
-                  <Input className="w-100" placeholder="http://imagelink.url/image.jpg" />
+                  <Input placeholder="http://imagelink.url/image.jpg" />
                 </Form.Item>
                 <Form.Item name="imagePreview" label="Header Preview">
                   <Image
-                    className="w-100"
                     src={store.articles.singleState.imageHeader}
+                    className="imgStyle"
                     fallback={DEFAULT_IMG}
                   />
                 </Form.Item>

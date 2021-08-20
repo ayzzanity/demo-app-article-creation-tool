@@ -68,6 +68,7 @@ const ApplyRootCrud = (apiPath, self) => {
     }),
 
     DELETE: flow(function* (id) {
+      self.isDeleting = true;
       const { data } = yield axios.delete(apiPath, {
         data: { ids: [id] }
       });
@@ -77,7 +78,7 @@ const ApplyRootCrud = (apiPath, self) => {
           1
         );
       }
-
+      self.isDeleting = false;
       return [{ message: 'Deleted', data }, null];
     })
   };

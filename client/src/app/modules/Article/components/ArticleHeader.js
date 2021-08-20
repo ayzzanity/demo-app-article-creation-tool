@@ -1,16 +1,13 @@
-import React, { Suspense } from 'react';
-import { Button, Col, Row, Space } from 'antd';
+import { Button, Col, Input, Row, Space } from 'antd';
 import { inject, observer } from 'mobx-react';
 import { PlusOutlined } from '@ant-design/icons';
 
-/**COMPONENTS */
+/**ARTICLE IMPORTS */
+import { ArticleController } from '@app_modules/Article/controller';
 
 /**CORE IMPORTS */
-import { ExactTitle, FallBackLoaders } from '@core_common/components';
-//import { AddOrUpdateArticleModal } from '../components';
-import { ArticleController } from '../controller';
+import { ExactTitle } from '@core_common/components';
 import { ANTD_HALF_COL } from '@core_common/antdhelpers/constants';
-import ArticleForm from './ArticleForm';
 
 const ArticleHeader = ({ store, form }) => {
   const { handleToggleShowFormModal } = ArticleController({ store, form });
@@ -35,22 +32,16 @@ const ArticleHeader = ({ store, form }) => {
               icon={<PlusOutlined />}
             />
 
-            {/* <Button className="shadow-sm" type="default" icon={<DownloadOutlined />} />
-
             <Input.Search
               className="shadow-sm"
               onSearch={() => {}}
               id="exact-search"
               placeholder={'Search'}
               enterButton={'Search'}
-            /> */}
+            />
           </Space>
         </Col>
       </Row>
-
-      <Suspense fallback={FallBackLoaders.EmptyLoader}>
-        <ArticleForm form={form} />
-      </Suspense>
     </>
   );
 };

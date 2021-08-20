@@ -1,7 +1,10 @@
 import { inject, observer } from 'mobx-react';
-import { ArticleController } from '../controller';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import './styles.css';
+
+/**ARTICLE IMPORTS */
+import { ArticleController } from '@app_modules/Article/controller';
 
 const TextEditor = ({ store }) => {
   const { handleArticleContent } = ArticleController({ store });

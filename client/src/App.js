@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react';
 
 /**APP IMPORTS */
 import { ArticleManagement } from '@app_modules/Article/view';
+import { DisplayArticles } from '@app_modules/DisplayArticles/view';
 
 /**APP CORE */
 import '@core_assets/css/exact-styles.css';
@@ -118,6 +119,7 @@ function App({ store }) {
               allowed={['Administrator']}
               Layout={AdminLayout}
             />
+            <Route exact path="/articles" component={DisplayArticles} />
             <Route component={Error404} />
           </Switch>
         </Router>
