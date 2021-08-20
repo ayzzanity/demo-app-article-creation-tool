@@ -2,12 +2,15 @@ const DisplayController = ({ store }) => {
   const { display } = store;
 
   const getArticles = async () => {
-    await display.LIST();
+    await display.GET_PUBLISHED();
   };
-  const getSortedArticles = async () => {
-    await display.SORT_BY_DATE();
+  const getArticle = async (id) => {
+    await display.RETRIEVE(id);
   };
-  return { getArticles, getSortedArticles };
+  const clearArticle = () => {
+    display.single.emptyArticle();
+  };
+  return { getArticles, getArticle, clearArticle };
 };
 
 export default DisplayController;

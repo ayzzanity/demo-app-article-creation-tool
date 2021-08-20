@@ -59,8 +59,10 @@ const ApplyRootCrud = (apiPath, self) => {
 
     RETRIEVE: flow(function* (id) {
       try {
+        self.loading = true;
         const { data } = yield axios.get(`${apiPath}/${id}`);
         Object.assign(self.single, data);
+        self.loading = false;
         return data;
       } catch (error) {
         return error;

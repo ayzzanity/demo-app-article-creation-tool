@@ -3,35 +3,26 @@ import axios from 'axios';
 
 const AdditionalCrud = (apiPath, self) => {
   return {
-    SORT_BY_DATE: flow(function* (params, shouldReturnList = false) {
+    GET_PUBLISHED: flow(function* () {
       try {
         const {
           data: { data, total_items }
-        } = yield axios.get(apiPath, { params });
+        } = yield axios.get(apiPath);
 
         const datWithKey = data.map((d) => ({ ...d, key: d.id }));
-        const dataSortedByDate = datWithKey
+        const dataFiltered = datWithKey.filter((data) => {
+          return data.status === 'Published';
+        });
+        const dataSortedByDate = dataFiltered
           .slice()
           .sort((a, b) => b.publishDate.toLowerCase().localeCompare(a.publishDate.toLowerCase()));
+
+        self.state = cast(dataFiltered);
         self.sorted = cast(dataSortedByDate);
         self.total = total_items;
-
-        if (shouldReturnList) {
-          return [dataSortedByDate, null];
-        }
       } catch (error) {
         console.log(error);
         return [null, error];
-      }
-    }),
-
-    RETRIEVE: flow(function* (id) {
-      try {
-        const { data } = yield axios.get(`${apiPath}/${id}`);
-        Object.assign(self.single, data);
-        return data;
-      } catch (error) {
-        return error;
       }
     })
   };

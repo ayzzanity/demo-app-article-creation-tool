@@ -6,8 +6,13 @@ const AppMenus = [
   {
     key: '3',
     icon: <EditOutlined />,
-    route: Routes.ARTICLE_ROUTE,
+    route: Routes.ARTICLE_MANAGEMENT_ROUTE,
     menuName: 'Article Management'
+  },
+  {
+    key: '4',
+    route: Routes.ARTICLES_ROUTE,
+    menuName: 'View Articles'
   }
 ];
 

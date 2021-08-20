@@ -10,7 +10,8 @@ const ArticleManagementController = ({ store, form }) => {
     setToggleShowViewModal,
     setToggleShowDeleteModal
   } = store.ArticleUtilities;
-  const { setViewArticle, setImageHeader, setContent } = store.articles.singleState;
+  const { setViewArticle, setImageHeader, setContent, content, status, publishDate } =
+    store.articles.singleState;
   //GET ARTICLES
   const getArticles = async () => {
     await store.articles.LIST();
@@ -51,7 +52,6 @@ const ArticleManagementController = ({ store, form }) => {
   };
   //ONCHANGE FORM FIELD
   const handleChangeForm = (fieldData) => {
-    console.log(fieldData);
     try {
       fieldData[0].name[0] === 'imageHeader' && setImageHeader(fieldData[0].value);
     } catch (e) {}
@@ -68,10 +68,11 @@ const ArticleManagementController = ({ store, form }) => {
       content: isUpdating ? 'Updating Article' : 'Creating Article',
       key: 'creatingArticle'
     });
-    let date = _getDate();
+    console.log(publishDate, values.publishDate);
+    let date = status !== values.status ? _getDate() : publishDate;
     const dataObject = {
       ...values,
-      content: store.articles.singleState.content,
+      content: content,
       publishDate: values.status === 'Draft' ? 'N/A' : `${date}`
     };
     const params = isUpdating ? [articleId, dataObject] : [dataObject];
