@@ -1,10 +1,12 @@
-import { Card, Image, Button } from 'antd';
+import { Card, Button } from 'antd';
 import { inject, observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
-import Routes from '@app_routing/Routes';
-import ArticleImage from './ArticleImage';
 
-const ArticleCard = ({ store, article, isSmall = false }) => {
+/**APP IMPORTS */
+import { ArticleImage } from '@app_modules/DisplayArticles/components';
+import Routes from '@app_routing/Routes';
+
+const ArticleCard = ({ store, article }) => {
   const { display } = store;
   const { Meta } = Card;
 
@@ -12,7 +14,7 @@ const ArticleCard = ({ store, article, isSmall = false }) => {
     <Card
       hoverable
       loading={display.loading}
-      style={{ width: 300, height: 320, marginBottom: 50, marginTop: 20 }}
+      style={{ width: 350, height: 320, marginBottom: 20 }}
       cover={<ArticleImage imageHeader={article.imageHeader} maxHeight={120} />}
     >
       <Meta

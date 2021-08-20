@@ -1,6 +1,8 @@
 import { Typography, Card } from 'antd';
 import { inject, observer } from 'mobx-react';
-import { ArticleImage } from '.';
+
+/**APP IMPORTS */
+import { ArticleImage } from '@app_modules/DisplayArticles/components';
 
 const ArticleViewCard = ({ store }) => {
   const { single, loading } = store.display;

@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { Col, Row } from 'antd';
 import { inject, observer } from 'mobx-react';
+
+/**APP IMPORTS */
+import { ArticleDisplayHeader, ArticleCard } from '@app_modules/DisplayArticles/components';
 import { DisplayController } from '@app_modules/DisplayArticles/controller';
-import { ArticleDisplayHeader } from '../components';
 import './styles.css';
-import ArticleCard from '../components/ArticleCard';
 
 const DisplayArticles = ({ store }) => {
   const { sorted } = store.display;

@@ -1,3 +1,4 @@
+/**CORE IMPORTS */
 import { ExactTitle } from '@core_common/components';
 
 const ArticleDisplayHeader = () => {

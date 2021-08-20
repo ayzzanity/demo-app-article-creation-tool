@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
-import { DisplayController } from '../controller';
 import { useParams } from 'react-router-dom';
+
+/**APP IMPORTS */
 import { ArticleBreadcrumb, ArticleViewCard } from '@app_modules/DisplayArticles/components';
+import { DisplayController } from '@app_modules/DisplayArticles/controller';
 
 const ViewArticle = ({ store }) => {
   const { getArticle, clearArticle } = DisplayController({ store });
