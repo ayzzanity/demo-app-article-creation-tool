@@ -1,5 +1,5 @@
 import React from 'react';
-import { EditOutlined } from '@ant-design/icons';
+import { EditOutlined, EyeFilled } from '@ant-design/icons';
 import Routes from '@app_routing/Routes';
 
 const AppMenus = [
@@ -11,6 +11,7 @@ const AppMenus = [
   },
   {
     key: '4',
+    icon: <EyeFilled />,
     route: Routes.ARTICLES_ROUTE,
     menuName: 'View Articles'
   }

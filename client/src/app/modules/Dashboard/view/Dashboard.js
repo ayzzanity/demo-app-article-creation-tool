@@ -1,9 +1,14 @@
 import { useEffect } from 'react';
-import { Card, Row, Space } from 'antd';
+import { Card, Row } from 'antd';
 import { inject, observer } from 'mobx-react';
+
+/**CORE IMPORTS */
 import { ExactTitle } from '@core_common/components';
+
+/**APP IMPORTS */
 import { ArticleController } from '@app_modules/ArticleManagement/controller';
 import { DisplayController } from '@app_modules/DisplayArticles/controller';
+import { CardStats, ListLatestArticles } from '@app_modules/Dashboard/components';
 
 const Dashboard = ({ store }) => {
   const { getArticles, getUsers } = ArticleController({ store });
@@ -16,42 +21,24 @@ const Dashboard = ({ store }) => {
   return (
     <div>
       <ExactTitle level={3} text="Dashboard" />
-      <section className="my-2 mx-2">
-        <Card loading={store.articles.loading}>
-          <Row>
-            <Space>
-              <Card style={{ width: 200, borderColor: '#3283a8' }} title="Total Users:">
-                <ExactTitle
-                  level={3}
-                  className="d-flex justify-content-end align-items-center"
-                  text={store.users.total}
-                />
-              </Card>
-              <Card style={{ width: 200, borderColor: '#3283a8' }} title="Total Articles:">
-                <ExactTitle
-                  level={3}
-                  className="d-flex justify-content-end align-items-center"
-                  text={store.articles.total}
-                />
-              </Card>
-              <Card style={{ width: 200, borderColor: '#3283a8' }} title="Published Articles:">
-                <ExactTitle
-                  level={3}
-                  className="d-flex justify-content-end align-items-center"
-                  text={store.display.sorted.length}
-                />
-              </Card>
-              <Card style={{ width: 200, borderColor: '#3283a8' }} title="Drafted Articles:">
-                <ExactTitle
-                  level={3}
-                  className="d-flex justify-content-end align-items-center"
-                  text={`${store.articles.total - store.display.sorted.length}`}
-                />
-              </Card>
-            </Space>
-          </Row>
-        </Card>
-      </section>
+      <Card loading={store.articles.loading}>
+        <Row>
+          <CardStats title="Total Users:" text={store.users.total} />
+          <CardStats title="Total Articles:" text={store.articles.total} />
+          <CardStats title="Published Articles:" text={store.display.sorted.length} />
+          <CardStats
+            title="Drafted Articles:"
+            text={`${store.articles.total - store.display.sorted.length}`}
+          />
+        </Row>
+      </Card>
+      <Card
+        loading={store.articles.loading}
+        title="Latest Published Articles"
+        style={{ marginTop: 10 }}
+      >
+        <ListLatestArticles data={store.display.sorted.slice(0, 5)} />
+      </Card>
     </div>
   );
 };
