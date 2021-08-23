@@ -8,7 +8,11 @@ const ListLatestArticles = ({ data }) => {
       dataSource={data}
       renderItem={(item) => (
         <List.Item>
-          <List.Item.Meta avatar={<Avatar src={item.imageHeader} />} title={item.title} />
+          <List.Item.Meta
+            avatar={<Avatar src={item.imageHeader} />}
+            title={item.title}
+            description={item.publishDate}
+          />
         </List.Item>
       )}
     />

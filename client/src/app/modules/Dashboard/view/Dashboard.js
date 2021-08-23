@@ -37,7 +37,7 @@ const Dashboard = ({ store }) => {
         title="Latest Published Articles"
         style={{ marginTop: 10 }}
       >
-        <ListLatestArticles data={store.display.sorted.slice(0, 5)} />
+        <ListLatestArticles data={store.display.sorted.slice(0, 4)} />
       </Card>
     </div>
   );

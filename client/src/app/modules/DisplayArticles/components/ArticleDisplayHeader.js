@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Input, Space, Row, Col } from 'antd';
 import { inject, observer } from 'mobx-react';
 
@@ -10,6 +11,11 @@ import { DisplayController } from '@app_modules/DisplayArticles/controller';
 
 const ArticleDisplayHeader = ({ store }) => {
   const { handleArticleSearch } = DisplayController({ store });
+  useEffect(() => {
+    return () => {
+      handleArticleSearch('');
+    };
+  }, []);
   return (
     <>
       <Row>

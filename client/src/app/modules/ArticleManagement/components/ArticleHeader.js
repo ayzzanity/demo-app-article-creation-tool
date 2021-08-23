@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Button, Col, Input, Row, Space } from 'antd';
 import { inject, observer } from 'mobx-react';
 import { PlusOutlined } from '@ant-design/icons';
@@ -11,7 +12,11 @@ import { ANTD_HALF_COL } from '@core_common/antdhelpers/constants';
 
 const ArticleHeader = ({ store, form }) => {
   const { handleToggleShowFormModal, handleArticleSearch } = ArticleController({ store, form });
-
+  useEffect(() => {
+    return () => {
+      handleArticleSearch('');
+    };
+  }, []);
   return (
     <>
       <Row>
