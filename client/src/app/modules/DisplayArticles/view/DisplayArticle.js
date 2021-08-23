@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { ArticleBreadcrumb, ArticleViewCard } from '@app_modules/DisplayArticles/components';
 import { DisplayController } from '@app_modules/DisplayArticles/controller';
 
-const ViewArticle = ({ store }) => {
+const DisplayArticle = ({ store }) => {
   const { getArticle, clearArticle } = DisplayController({ store });
   const { id } = useParams();
   useEffect(() => {
@@ -26,4 +26,4 @@ const ViewArticle = ({ store }) => {
   );
 };
 
-export default inject('store')(observer(ViewArticle));
+export default inject('store')(observer(DisplayArticle));

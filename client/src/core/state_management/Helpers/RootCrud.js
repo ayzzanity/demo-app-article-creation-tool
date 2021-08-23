@@ -21,13 +21,11 @@ const ApplyRootCrud = (apiPath, self) => {
       try {
         //APPLY PAGINATION
         self.loading = true;
-
         const {
           data: { data, total_items }
         } = yield axios.get(apiPath, { params });
 
         const datWithKey = data.map((d) => ({ ...d, key: d.id }));
-
         self.state = cast(datWithKey);
         self.total = total_items;
         self.loading = false;

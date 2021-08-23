@@ -3,14 +3,14 @@ import axios from 'axios';
 
 const AdditionalCrud = (apiPath, self) => {
   return {
-    GET_PUBLISHED: flow(function* () {
+    GET_PUBLISHED: flow(function* (params) {
       try {
         const {
-          data: { data, total_items }
-        } = yield axios.get(apiPath);
-
-        const datWithKey = data.map((d) => ({ ...d, key: d.id }));
-        const dataFiltered = datWithKey.filter((data) => {
+          data: { data }
+        } = yield axios.get(apiPath, { params });
+        self.total = cast(data.length);
+        const dataWithKey = data.map((d) => ({ ...d, key: d.id }));
+        const dataFiltered = dataWithKey.filter((data) => {
           return data.status === 'Published';
         });
         const dataSortedByDate = dataFiltered
@@ -19,7 +19,6 @@ const AdditionalCrud = (apiPath, self) => {
 
         self.state = cast(dataFiltered);
         self.sorted = cast(dataSortedByDate);
-        self.total = total_items;
       } catch (error) {
         console.log(error);
         return [null, error];

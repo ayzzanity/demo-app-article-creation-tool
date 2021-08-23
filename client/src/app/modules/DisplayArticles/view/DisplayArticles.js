@@ -1,29 +1,42 @@
 import { useEffect } from 'react';
-import { Col, Row } from 'antd';
+import { Col, Row, Space } from 'antd';
 import { inject, observer } from 'mobx-react';
 
+/**CORE IMPORTS */
+import { THREE_GRID, ANTD_MAX_COL } from '@core_common/antdhelpers/constants';
+
 /**APP IMPORTS */
-import { ArticleDisplayHeader, ArticleCard } from '@app_modules/DisplayArticles/components';
+import {
+  ArticleCard,
+  ArticleDisplayHeader,
+  ArticlePagination
+} from '@app_modules/DisplayArticles/components';
 import { DisplayController } from '@app_modules/DisplayArticles/controller';
 import './styles.css';
 
 const DisplayArticles = ({ store }) => {
   const { sorted } = store.display;
-  const { getArticles } = DisplayController({ store });
-  useEffect(getArticles, []);
+  const { minValue, maxValue } = store.DisplayUtilities;
+  const { getPublishedArticles } = DisplayController({ store });
+  useEffect(getPublishedArticles, []);
 
   return (
     <div className="background">
       <div style={{ width: '85%', margin: '3rem auto' }}>
         <ArticleDisplayHeader />
         <Row gutter={[32, 16]}>
-          {sorted.map((article) => {
+          {sorted.slice(minValue, maxValue).map((article) => {
             return (
-              <Col key={article.key} lg={8} md={12} xs={24}>
-                <ArticleCard article={article} />
-              </Col>
+              <Space>
+                <Col key={article.key} {...THREE_GRID}>
+                  <ArticleCard article={article} />
+                </Col>
+              </Space>
             );
           })}
+          <Col span={ANTD_MAX_COL}>
+            <ArticlePagination />
+          </Col>
         </Row>
       </div>
     </div>

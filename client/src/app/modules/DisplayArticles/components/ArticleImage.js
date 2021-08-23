@@ -6,7 +6,7 @@ const ArticleImage = ({ store, imageHeader, maxHeight, isView = false }) => {
     <Image
       style={{ height: maxHeight, objectFit: 'cover' }}
       src={imageHeader}
-      fallback={store.ArticleUtilities.DEFAULT_IMG}
+      fallback={store.DisplayUtilities.DEFAULT_IMG}
       preview={isView}
     />
   );

@@ -8,7 +8,7 @@ import { TextEditor } from '@app_modules/ArticleManagement/components';
 
 /**CORE IMPORTS */
 import { ExactText } from '@core_common/components';
-import { required } from '@core_common/antdhelpers/helperfunctions';
+// import { required } from '@core_common/antdhelpers/helperfunctions';
 import { TWO_GRID_TWOTHIRD, TWO_GRID_ONETHIRD } from '@core_common/antdhelpers/constants';
 
 function ArticleForm({ store, form }) {

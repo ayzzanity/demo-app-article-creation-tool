@@ -1,6 +1,6 @@
 import { message } from 'antd';
 
-const ArticleManagementController = ({ store, form }) => {
+const ArticleController = ({ store, form }) => {
   const {
     articleId,
     isUpdatingArticle,
@@ -14,11 +14,41 @@ const ArticleManagementController = ({ store, form }) => {
     store.articles.singleState;
   //GET ARTICLES
   const getArticles = async () => {
-    await store.articles.LIST();
+    const page = 1;
+
+    const search = store.ArticleUtilities.search;
+    const props = store.ArticleUtilities.props;
+    let params = { page, search, props };
+
+    await store.articles.LIST(params);
   };
   //GET USERS
   const getUsers = async () => {
-    await store.users.LIST();
+    const page = 1;
+
+    const search = store.UserManagementUtilities.search;
+    const props = store.UserManagementUtilities.props;
+    let params = { page, search, props };
+
+    await store.users.LIST(params);
+  };
+  //ON PAGE CHANGE
+  const onChangePage = async (page) => {
+    const search = store.ArticleUtilities.search;
+    const props = store.ArticleUtilities.props;
+
+    let params = { page, search, props };
+
+    await store.articles.LIST(params);
+  };
+  //SEARCH ARTICLE
+  const handleArticleSearch = async (search) => {
+    search = search.trim();
+    const props = store.ArticleUtilities.props;
+    let params = { search, props };
+
+    store.ArticleUtilities.setSearch(search);
+    await store.articles.LIST(params);
   };
   //TOGGLE SHOW FORM MODAL
   const handleToggleShowFormModal = (article, isUpdating = false) => {
@@ -134,8 +164,10 @@ const ArticleManagementController = ({ store, form }) => {
     handleDeleteArticle,
     handleChangeForm,
     handleArticleContent,
-    handleToggleShowDeleteModal
+    handleToggleShowDeleteModal,
+    handleArticleSearch,
+    onChangePage
   };
 };
 
-export default ArticleManagementController;
+export default ArticleController;

@@ -26,7 +26,7 @@ const ArticleCard = ({ store, article }) => {
       </div>
 
       <Button size="small" block type="primary">
-        <Link to={`${Routes.VIEW_ARTICLE_ROUTE}/${article.user_article_id}/${article.id}`}>
+        <Link to={`${Routes.ARTICLE_ROUTE}/${article.user_article_id}/${article.id}`}>
           READ FULL ARTICLE
         </Link>
       </Button>

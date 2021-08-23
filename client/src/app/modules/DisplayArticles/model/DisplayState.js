@@ -11,6 +11,7 @@ export default types
     state: types.optional(types.array(DisplayModel), []),
     single: types.optional(DisplayModel, {}),
     sorted: types.optional(types.array(SortedModel), []),
+    total: types.optional(types.number, 0),
     loading: types.optional(types.boolean, false)
   })
   .actions((self) => ({

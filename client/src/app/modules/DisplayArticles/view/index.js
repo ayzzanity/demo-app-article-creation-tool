@@ -1,4 +1,4 @@
 import DisplayArticles from './DisplayArticles';
-import ViewArticle from './ViewArticle';
+import DisplayArticle from './DisplayArticle';
 
-export { DisplayArticles, ViewArticle };
+export { DisplayArticles, DisplayArticle };

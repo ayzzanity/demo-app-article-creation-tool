@@ -4,7 +4,8 @@ import { inject, observer } from 'mobx-react';
 
 /**APP IMPORTS */
 import { ArticleManagement } from '@app_modules/ArticleManagement/view';
-import { DisplayArticles, ViewArticle } from '@app_modules/DisplayArticles/view';
+import { DisplayArticles, DisplayArticle } from '@app_modules/DisplayArticles/view';
+import { Dashboard } from '@app_modules/Dashboard/view';
 
 /**APP CORE */
 import '@core_assets/css/exact-styles.css';
@@ -17,7 +18,7 @@ import {
   AdminSettings,
   AdminLayout,
   SignInLayout,
-  Dashboard,
+  // Dashboard,
   UserManagement,
   Login,
   ResetPassword,
@@ -122,8 +123,8 @@ function App({ store }) {
             <Route exact path={Routes.ARTICLES_ROUTE} component={DisplayArticles} />
             <Route
               exact
-              path={`${Routes.VIEW_ARTICLE_ROUTE}/:user_article_id/:id`}
-              component={ViewArticle}
+              path={`${Routes.ARTICLE_ROUTE}/:user_article_id/:id`}
+              component={DisplayArticle}
             />
             <Route component={Error404} />
           </Switch>

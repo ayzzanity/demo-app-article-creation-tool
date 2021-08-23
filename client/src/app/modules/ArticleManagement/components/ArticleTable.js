@@ -12,7 +12,8 @@ function ArticleTable({ store, form }) {
     getArticles,
     handleToggleShowFormModal,
     handleToggleShowViewModal,
-    handleToggleShowDeleteModal
+    handleToggleShowDeleteModal,
+    onChangePage
   } = ArticleController({ store, form });
 
   // eslint-disable-next-line
@@ -150,6 +151,7 @@ function ArticleTable({ store, form }) {
       dataSource={store.articles.state.toJSON()}
       pagination={{
         position: ['bottomCenter'],
+        onChange: onChangePage,
         hideOnSinglePage: true,
         pageSize: 10,
         responsive: true,

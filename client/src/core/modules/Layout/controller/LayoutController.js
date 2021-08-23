@@ -24,9 +24,9 @@ const LayoutController = ({ store, history, setSelectedKeys }) => {
       setSelectedKeys(['1']);
     } else if (history.location.pathname === Routes.USER_MANAGEMENT_ROUTE) {
       setSelectedKeys(['2']);
-    } else if (history.location.pathname === Routes.ARTICLE_ROUTE) {
-    setSelectedKeys(['3']);
-  } 
+    } else if (history.location.pathname === Routes.ARTICLE_MANAGEMENT_ROUTE) {
+      setSelectedKeys(['3']);
+    }
   };
 
   const responsiveClass = (screens) => {

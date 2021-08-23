@@ -10,7 +10,7 @@ import { ExactTitle } from '@core_common/components';
 import { ANTD_HALF_COL } from '@core_common/antdhelpers/constants';
 
 const ArticleHeader = ({ store, form }) => {
-  const { handleToggleShowFormModal } = ArticleController({ store, form });
+  const { handleToggleShowFormModal, handleArticleSearch } = ArticleController({ store, form });
 
   return (
     <>
@@ -31,12 +31,11 @@ const ArticleHeader = ({ store, form }) => {
               type="default"
               icon={<PlusOutlined />}
             />
-
             <Input.Search
               className="shadow-sm"
-              onSearch={() => {}}
+              onSearch={handleArticleSearch}
               id="exact-search"
-              placeholder={'Search'}
+              placeholder={'Search by Title'}
               enterButton={'Search'}
             />
           </Space>
