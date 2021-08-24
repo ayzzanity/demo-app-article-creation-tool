@@ -1,3 +1,4 @@
-import AppRoutes from './AppRoutes';
+import Routes from './Routes';
+import PublicRoute from './PublicRoute';
 
-export { AppRoutes };
+export { Routes, PublicRoute };

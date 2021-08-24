@@ -22,6 +22,14 @@ const ArticleController = ({ store, form }) => {
 
     await store.articles.LIST(params);
   };
+  //GET DRAFTS
+  const getDrafts = async () => {
+    const search = store.ArticleUtilities.search;
+    const props = store.ArticleUtilities.props;
+    let params = { search, props };
+
+    await store.articles.GET_DRAFTS(params);
+  };
   //GET USERS
   const getUsers = async () => {
     const page = 1;
@@ -98,7 +106,6 @@ const ArticleController = ({ store, form }) => {
       content: isUpdating ? 'Updating Article' : 'Creating Article',
       key: 'creatingArticle'
     });
-    console.log(publishDate, values.publishDate);
     let date = status !== values.status ? _getDate() : publishDate;
     const dataObject = {
       ...values,
@@ -157,6 +164,7 @@ const ArticleController = ({ store, form }) => {
   }
   return {
     getArticles,
+    getDrafts,
     getUsers,
     handleToggleShowFormModal,
     handleToggleShowViewModal,

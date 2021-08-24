@@ -22,7 +22,7 @@ const DisplayArticles = ({ store }) => {
 
   return (
     <div className="background">
-      <div style={{ width: '85%', margin: '3rem auto' }}>
+      <div style={{ width: '85%', margin: '2rem auto' }}>
         <ArticleDisplayHeader />
         <Row gutter={[32, 16]}>
           {sorted.slice(minValue, maxValue).map((article) => {

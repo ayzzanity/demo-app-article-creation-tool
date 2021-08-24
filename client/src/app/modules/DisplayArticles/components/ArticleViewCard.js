@@ -7,6 +7,7 @@ import { ArticleImage } from '@app_modules/DisplayArticles/components';
 const ArticleViewCard = ({ store }) => {
   const { single, loading } = store.display;
   const { Title } = Typography;
+  const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
   return (
     <Card
       loading={loading}
@@ -16,7 +17,8 @@ const ArticleViewCard = ({ store }) => {
       <br />
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Title level={4}>
-          {single.publishDate} by {single.Users.first_name} {single.Users.last_name}
+          Published {single.publishDate && formatter.format(Date.parse(single.publishDate))} by{' '}
+          {single.Users.first_name} {single.Users.last_name}
         </Title>
       </div>
       <br />

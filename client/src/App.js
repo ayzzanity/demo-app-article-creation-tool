@@ -6,6 +6,8 @@ import { inject, observer } from 'mobx-react';
 import { ArticleManagement } from '@app_modules/ArticleManagement/view';
 import { DisplayArticles, DisplayArticle } from '@app_modules/DisplayArticles/view';
 import { Dashboard } from '@app_modules/Dashboard/view';
+import { NavBar } from '@app_modules/Layout';
+import { PublicRoute } from '@app_routing/';
 
 /**APP CORE */
 import '@core_assets/css/exact-styles.css';
@@ -56,15 +58,6 @@ function App({ store }) {
               login={login}
               Component={ArticleManagement}
               Layout={AdminLayout}
-            />
-            <PrivateRoute
-              exact
-              path={'/test'}
-              allowed={['Administrator']}
-              isAuthorized={true}
-              login={login}
-              Component={UserActivityTable}
-              // Layout={AdminLayout}
             />
             <PrivateRoute
               exact
@@ -120,11 +113,18 @@ function App({ store }) {
               allowed={['Administrator']}
               Layout={AdminLayout}
             />
-            <Route exact path={Routes.ARTICLES_ROUTE} component={DisplayArticles} />
-            <Route
+
+            <PublicRoute
+              exact
+              path={Routes.ARTICLES_ROUTE}
+              Component={DisplayArticles}
+              Layout={NavBar}
+            />
+            <PublicRoute
               exact
               path={`${Routes.ARTICLE_ROUTE}/:user_article_id/:id`}
-              component={DisplayArticle}
+              Component={DisplayArticle}
+              Layout={NavBar}
             />
             <Route component={Error404} />
           </Switch>

@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import { useParams } from 'react-router-dom';
 
 /**APP IMPORTS */
-import { ArticleBreadcrumb, ArticleViewCard } from '@app_modules/DisplayArticles/components';
+import { ArticleViewCard } from '@app_modules/DisplayArticles/components';
 import { DisplayController } from '@app_modules/DisplayArticles/controller';
 
 const DisplayArticle = ({ store }) => {
@@ -19,7 +19,6 @@ const DisplayArticle = ({ store }) => {
   return (
     <div className="background">
       <div style={{ width: '85%', margin: '3rem auto' }}>
-        <ArticleBreadcrumb />
         <ArticleViewCard />
       </div>
     </div>

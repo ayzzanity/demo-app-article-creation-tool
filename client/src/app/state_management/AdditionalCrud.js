@@ -23,6 +23,26 @@ const AdditionalCrud = (apiPath, self) => {
         console.log(error);
         return [null, error];
       }
+    }),
+    GET_DRAFTS: flow(function* (params) {
+      try {
+        const {
+          data: { data }
+        } = yield axios.get(apiPath, { params });
+        self.total = cast(data.length);
+        const dataWithKey = data.map((d) => ({ ...d, key: d.id }));
+        const dataFiltered = dataWithKey.filter((data) => {
+          return data.status === 'Draft';
+        });
+        const dataSortedByDate = dataFiltered
+          .slice()
+          .sort((a, b) => b.publishDate.toLowerCase().localeCompare(a.publishDate.toLowerCase()));
+
+        self.sorted = cast(dataSortedByDate);
+      } catch (error) {
+        console.log(error);
+        return [null, error];
+      }
     })
   };
 };

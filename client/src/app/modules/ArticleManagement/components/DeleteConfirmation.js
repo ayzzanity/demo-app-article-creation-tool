@@ -58,14 +58,12 @@ const DeleteConfirmation = ({ store, form }) => {
           </Form.Item>
           <Form.Item>
             <div className="d-flex w-100 justify-content-end">
-              <Space>
-                <Button onClick={handleToggleShowDeleteModal} type="default">
-                  Cancel
-                </Button>
-                <Button loading={isDeleting} danger type="primary" htmlType="submit">
-                  DELETE ARTICLE
-                </Button>
-              </Space>
+              <Button onClick={handleToggleShowDeleteModal} type="default">
+                Cancel
+              </Button>
+              <Button loading={isDeleting} danger type="primary" htmlType="submit">
+                DELETE ARTICLE
+              </Button>
             </div>
           </Form.Item>
         </Form>

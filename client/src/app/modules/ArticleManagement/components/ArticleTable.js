@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { Button, Divider, Space, Table, Typography, Popconfirm } from 'antd';
+import { Button, Space, Table, Typography, Popconfirm } from 'antd';
 import { EditFilled, EyeOutlined, DeleteOutlined } from '@ant-design/icons';
 import { inject, observer } from 'mobx-react';
 
 /**ARTICLE IMPORTS */
 import { ArticleController } from '@app_modules/ArticleManagement/controller';
+import ArticleMobileView from './ArticleMobileView';
 
 function ArticleTable({ store, form }) {
   const { Text } = Typography;
@@ -18,57 +19,29 @@ function ArticleTable({ store, form }) {
 
   // eslint-disable-next-line
   useEffect(getArticles, []);
-
+  const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'short', timeStyle: 'short' });
   const columns = [
     {
       title: 'Articles',
       render: (articleData) => (
-        <Space
-          split={<Divider style={{ paddingTop: 10, paddingBottom: 10, margin: 0 }} />}
-          direction="vertical"
-        >
-          <Space direction="vertical">
-            <Text type="secondary">Title</Text>
-            <Text strong>{articleData.title}</Text>
-          </Space>
-
-          <Space direction="vertical">
-            <Text type="secondary">Content</Text>
-            <Text strong>{articleData.content}</Text>
-          </Space>
-          <Space direction="vertical">
-            <Text type="secondary">Published By</Text>
-            <Text strong>
-              {articleData.Users.first_name} {articleData.Users.last_name}
-            </Text>
-          </Space>
-          <Space direction="vertical">
-            <Text type="secondary">Publish Date</Text>
-            <Text strong>{articleData.publishDate}</Text>
-          </Space>
-          <Space direction="vertical">
-            <Text type="secondary">Status</Text>
-            <Text strong>{articleData.status}</Text>
-          </Space>
-
-          <Space>
-            <Button onClick={() => {}} icon={<EditFilled />} type="link">
-              Update
-            </Button>
-          </Space>
-        </Space>
+        <ArticleMobileView
+          articleData={articleData}
+          handleView={handleToggleShowViewModal}
+          handleDelete={handleToggleShowDeleteModal}
+          handleUpdate={handleToggleShowFormModal}
+        />
       ),
       responsive: ['xs']
     },
     {
       title: 'Title'.toUpperCase(),
       dataIndex: 'title',
+      width: '50%',
       render: (text) => <>{text}</>,
       shouldCellUpdate: (prev, next) => JSON.stringify(prev) !== JSON.stringify(next),
       sorter: (a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()),
       responsive: ['sm', 'md', 'lg', 'xl']
     },
-
     {
       title: 'User'.toUpperCase(),
       dataIndex: 'Users',
@@ -91,7 +64,7 @@ function ArticleTable({ store, form }) {
       responsive: ['xl'],
       shouldCellUpdate: (prev, next) => JSON.stringify(prev) !== JSON.stringify(next),
       render: (text) => {
-        return <Text>{text}</Text>;
+        return <Text>{text === 'N/A' ? text : formatter.format(Date.parse(text))}</Text>;
       }
     },
     {

@@ -6,7 +6,7 @@ const ArticlePagination = ({ store }) => {
   const { numEachPage, onChangePage } = DisplayController({ store });
   return (
     <Pagination
-      defaultCurrent={1}
+      current={store.DisplayUtilities.currentPage}
       onChange={onChangePage}
       hideOnSinglePage={true}
       pageSize={numEachPage}

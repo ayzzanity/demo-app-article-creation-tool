@@ -9,7 +9,7 @@ import Routes from '@app_routing/Routes';
 const ArticleCard = ({ store, article }) => {
   const { display } = store;
   const { Meta } = Card;
-
+  const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'short', timeStyle: 'short' });
   return (
     <Card
       hoverable
@@ -19,7 +19,9 @@ const ArticleCard = ({ store, article }) => {
     >
       <Meta
         title={article.title}
-        description={`By ${article.Users.first_name} ${article.Users.last_name} [${article.publishDate}]`}
+        description={`By ${article.Users.first_name} ${article.Users.last_name} [${
+          article.publishDate && formatter.format(Date.parse(article.publishDate))
+        }]`}
       />
       <div style={{ marginTop: 20, marginBottom: 15, height: 50, overflow: 'hidden' }}>
         <div dangerouslySetInnerHTML={{ __html: article.content }} />
