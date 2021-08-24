@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Col, Row, Space } from 'antd';
+import { Col, Row, Space, BackTop } from 'antd';
 import { inject, observer } from 'mobx-react';
 
 /**CORE IMPORTS */
@@ -39,6 +39,7 @@ const DisplayArticles = ({ store }) => {
           </Col>
         </Row>
       </div>
+      <BackTop target={() => document.getElementsByClassName('background')[0]} />
     </div>
   );
 };
