@@ -29,7 +29,7 @@ const Dashboard = ({ store }) => {
           <CardStats title="Total Users:" text={store.users.total} />
           <CardStats title="Total Articles:" text={store.articles.total} />
           <CardStats title="Published Articles:" text={store.display.sorted.length} />
-          <CardStats title="Drafted Articles:" text={`${store.articles.sorted.length}`} />
+          <CardStats title="Drafted Articles:" text={store.articles.sorted.length} />
         </Row>
       </Card>
       <Row>
