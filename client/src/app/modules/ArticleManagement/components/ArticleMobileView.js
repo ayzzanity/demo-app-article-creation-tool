@@ -1,29 +1,33 @@
 import { Space, Divider, Typography, Button, Popconfirm } from 'antd';
 import { EditFilled, EyeOutlined, DeleteOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
+
 const ArticleMobileView = ({ articleData, handleView, handleDelete, handleUpdate }) => {
+  const { t } = useTranslation('common');
   const { Text } = Typography;
+
   return (
     <Space
       split={<Divider style={{ paddingTop: 10, paddingBottom: 10, margin: 0 }} />}
       direction="vertical"
     >
       <Space direction="vertical">
-        <Text type="secondary">Title</Text>
+        <Text type="secondary">{t('Title')}</Text>
         <Text strong>{articleData.title}</Text>
       </Space>
 
       <Space direction="vertical">
-        <Text type="secondary">Published By</Text>
+        <Text type="secondary">{t('Published By')}</Text>
         <Text strong>
           {articleData.Users.first_name} {articleData.Users.last_name}
         </Text>
       </Space>
       <Space direction="vertical">
-        <Text type="secondary">Publish Date</Text>
+        <Text type="secondary">{t('Publish Date')}</Text>
         <Text strong>{articleData.publishDate}</Text>
       </Space>
       <Space direction="vertical">
-        <Text type="secondary">Status</Text>
+        <Text type="secondary">{t('Status')}</Text>
         <Text strong>{articleData.status}</Text>
       </Space>
 
@@ -36,7 +40,7 @@ const ArticleMobileView = ({ articleData, handleView, handleDelete, handleUpdate
           type="link"
           style={{ color: '#009174' }}
         >
-          Update
+          {t('Update')}
         </Button>
         <Button
           onClick={() => {
@@ -45,7 +49,7 @@ const ArticleMobileView = ({ articleData, handleView, handleDelete, handleUpdate
           icon={<EyeOutlined />}
           type="link"
         >
-          Preview
+          {t('Preview')}
         </Button>
         <Popconfirm
           placement="topRight"
@@ -57,7 +61,7 @@ const ArticleMobileView = ({ articleData, handleView, handleDelete, handleUpdate
           cancelText="No"
         >
           <Button icon={<DeleteOutlined />} type="link" style={{ color: '#9B2311' }}>
-            Delete
+            {t('Delete')}
           </Button>
         </Popconfirm>
       </Space>

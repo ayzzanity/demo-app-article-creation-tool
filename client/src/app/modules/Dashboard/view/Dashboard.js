@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import { Card, Row, Col } from 'antd';
+import { Card, Row } from 'antd';
 import { inject, observer } from 'mobx-react';
+import { useTranslation } from 'react-i18next';
 
 /**CORE IMPORTS */
 import { ExactTitle } from '@core_common/components';
@@ -8,10 +9,10 @@ import { ExactTitle } from '@core_common/components';
 /**APP IMPORTS */
 import { ArticleController } from '@app_modules/ArticleManagement/controller';
 import { DisplayController } from '@app_modules/DisplayArticles/controller';
-import { CardStats, ListLatestArticles } from '@app_modules/Dashboard/components';
-import { TWO_GRID } from '@core_common/antdhelpers/constants';
+import { CardStats, DraftList, PublishedList } from '@app_modules/Dashboard/components';
 
 const Dashboard = ({ store }) => {
+  const { t } = useTranslation('common');
   const { getArticles, getDrafts, getUsers } = ArticleController({ store });
   const { getPublishedArticles } = DisplayController({ store });
   useEffect(() => {
@@ -22,7 +23,7 @@ const Dashboard = ({ store }) => {
   }, []);
   return (
     <div>
-      <ExactTitle level={3} text="Dashboard" />
+      <ExactTitle level={3} text={t('Dashboard')} />
       <Card loading={store.articles.loading}>
         <Row>
           <CardStats title="Total Users:" text={store.users.total} />
@@ -32,24 +33,8 @@ const Dashboard = ({ store }) => {
         </Row>
       </Card>
       <Row>
-        <Col {...TWO_GRID}>
-          <Card
-            loading={store.articles.loading}
-            title="Latest Published Articles"
-            style={{ marginTop: 10, marginRight: 10 }}
-          >
-            <ListLatestArticles data={store.display.sorted.slice(0, 4)} />
-          </Card>
-        </Col>
-        <Col {...TWO_GRID}>
-          <Card
-            loading={store.articles.loading}
-            title="Latest Drafts"
-            style={{ marginTop: 10, marginLeft: 10 }}
-          >
-            <ListLatestArticles data={store.articles.sorted.slice(0, 4)} />
-          </Card>
-        </Col>
+        <PublishedList />
+        <DraftList />
       </Row>
     </div>
   );

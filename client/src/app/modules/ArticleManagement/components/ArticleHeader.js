@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Button, Col, Input, Row, Space } from 'antd';
 import { inject, observer } from 'mobx-react';
 import { PlusOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 /**ARTICLE IMPORTS */
 import { ArticleController } from '@app_modules/ArticleManagement/controller';
@@ -11,6 +12,7 @@ import { ExactTitle } from '@core_common/components';
 import { ANTD_HALF_COL } from '@core_common/antdhelpers/constants';
 
 const ArticleHeader = ({ store, form }) => {
+  const { t } = useTranslation('common');
   const { handleToggleShowFormModal, handleArticleSearch } = ArticleController({ store, form });
   useEffect(() => {
     return () => {
@@ -22,7 +24,7 @@ const ArticleHeader = ({ store, form }) => {
       <Row>
         <Col md={{ span: ANTD_HALF_COL }}>
           {' '}
-          <ExactTitle level={3} text="Article Management" />
+          <ExactTitle level={3} text={t('Article Management')} />
         </Col>
         <Col
           className="d-flex w-100 justify-content-end align-items-center"
@@ -40,8 +42,8 @@ const ArticleHeader = ({ store, form }) => {
               className="shadow-sm"
               onSearch={handleArticleSearch}
               id="exact-search"
-              placeholder={'Search by Title'}
-              enterButton={'Search'}
+              placeholder={t('Search by Title')}
+              enterButton={t('Search')}
             />
           </Space>
         </Col>

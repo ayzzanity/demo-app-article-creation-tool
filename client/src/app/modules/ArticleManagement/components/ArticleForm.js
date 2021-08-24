@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Modal, Space, Button, Col, Form, Input, Row, Select, Image } from 'antd';
 import { inject, observer } from 'mobx-react';
+import { useTranslation } from 'react-i18next';
 
 /**ARTICLE IMPORTS */
 import { ArticleController } from '@app_modules/ArticleManagement/controller';
@@ -12,6 +13,7 @@ import { ExactText } from '@core_common/components';
 import { TWO_GRID_TWOTHIRD, TWO_GRID_ONETHIRD } from '@core_common/antdhelpers/constants';
 
 function ArticleForm({ store, form }) {
+  const { t } = useTranslation('common');
   const { Option } = Select;
   const { showFormModal, DEFAULT_IMG } = store.ArticleUtilities;
   const { isCreating } = store.articles;
@@ -27,7 +29,9 @@ function ArticleForm({ store, form }) {
       <Modal
         title={
           <ExactText
-            text={store.ArticleUtilities.isUpdatingArticle ? 'Update Article' : 'Add New Article'}
+            text={
+              store.ArticleUtilities.isUpdatingArticle ? t('Update Article') : t('Add New Article')
+            }
           />
         }
         visible={showFormModal}
@@ -55,27 +59,27 @@ function ArticleForm({ store, form }) {
                 <Form.Item
                   className="w-100"
                   name="title"
-                  label="Article Title"
+                  label={t('Article Title')}
                   //rules={[required('Please enter a title!')]}
                 >
-                  <Input placeholder="Article Title" />
+                  <Input placeholder={t('Article Title')} />
                 </Form.Item>
               </Col>
               <Col {...TWO_GRID_ONETHIRD}>
-                <Form.Item name="status" label="Status">
+                <Form.Item name="status" label={t('Status')}>
                   <Select>
                     <Option key="draft" value="Draft">
-                      Draft
+                      {t('Draft')}
                     </Option>
                     <Option key="published" value="Published">
-                      Published
+                      {t('Published')}
                     </Option>
                     ))
                   </Select>
                 </Form.Item>
               </Col>
               <Col {...TWO_GRID_TWOTHIRD}>
-                <Form.Item name="content" label="Content" className="w-200">
+                <Form.Item name="content" label={t('Content')} className="w-200">
                   {/* <Input.TextArea
                     className="w-100"
                     placeholder="Content"
@@ -87,10 +91,10 @@ function ArticleForm({ store, form }) {
               <Col {...TWO_GRID_ONETHIRD}>
                 <Form.Item
                   name="user_article_id"
-                  label="Assigned User"
+                  label={t('Assign User')}
                   // rules={[required('Please assign a user!')]}
                 >
-                  <Select placeholder="Please select type" showSearch={true}>
+                  <Select placeholder={t('Please select type')} showSearch={true}>
                     {store.users.state.map((user) => (
                       <Option key={user.id} value={user.id}>
                         {user.first_name} {user.last_name}
@@ -98,10 +102,10 @@ function ArticleForm({ store, form }) {
                     ))}
                   </Select>
                 </Form.Item>
-                <Form.Item name="imageHeader" label="Image Header Link">
+                <Form.Item name="imageHeader" label={t('Image Header Link')}>
                   <Input placeholder="http://imagelink.url/image.jpg" />
                 </Form.Item>
-                <Form.Item name="imagePreview" label="Header Preview">
+                <Form.Item name="imagePreview" label={t('Header Preview')}>
                   <Image
                     src={store.articles.singleState.imageHeader}
                     className="imgStyle"
@@ -116,12 +120,12 @@ function ArticleForm({ store, form }) {
             <div className="d-flex w-100 justify-content-end">
               <Space>
                 <Button onClick={handleToggleShowFormModal} type="default">
-                  Cancel
+                  {t('Cancel')}
                 </Button>
                 <Button loading={isCreating} type="primary" htmlType="submit">
                   {store.ArticleUtilities.isUpdatingArticle
-                    ? 'Update Article'
-                    : 'Create New Article'}
+                    ? t('Update Article')
+                    : t('Create New Article')}
                 </Button>
               </Space>
             </div>

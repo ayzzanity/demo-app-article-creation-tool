@@ -1,5 +1,6 @@
 import { Modal, Space, Typography, Divider, Image } from 'antd';
 import { inject, observer } from 'mobx-react';
+import { useTranslation } from 'react-i18next';
 
 /**ARTICLE IMPORTS */
 import { ArticleController } from '@app_modules/ArticleManagement/controller';
@@ -8,6 +9,7 @@ import { ArticleController } from '@app_modules/ArticleManagement/controller';
 import { ExactText } from '@core_common/components';
 
 const ArticleView = ({ store }) => {
+  const { t } = useTranslation('common');
   const { Text } = Typography;
   const { singleState } = store.articles;
   const { showViewModal, DEFAULT_IMG } = store.ArticleUtilities;
@@ -16,7 +18,7 @@ const ArticleView = ({ store }) => {
   return (
     <Modal
       visible={showViewModal}
-      title={<ExactText text="Article Preview" />}
+      title={<ExactText text={t('Article Preview')} />}
       footer={null}
       className="exact-modal"
       style={{ top: 20 }}
@@ -32,27 +34,27 @@ const ArticleView = ({ store }) => {
           preview={singleState.imageHeader}
         />
         <Space direction="horizontal">
-          <Text type="secondary">Title</Text>
+          <Text type="secondary">{t('Title')}</Text>
           <Text strong>{singleState.title}</Text>
         </Space>
         <Space direction="vertical">
-          <Text type="secondary">Content</Text>
+          <Text type="secondary">{t('Content')}</Text>
           <div dangerouslySetInnerHTML={{ __html: singleState.content }} />
         </Space>
         <Space direction="horizontal">
           <Text type="secondary">
-            {singleState.status === 'Draft' ? 'Drafted By' : 'Published By'}
+            {singleState.status === 'Draft' ? t('Drafted By') : t('Published By')}
           </Text>
           <Text strong>
             {store.users.single.first_name} {store.users.single.last_name}
           </Text>
         </Space>
         <Space direction="horizontal">
-          <Text type="secondary">Publish Date</Text>
+          <Text type="secondary">{t('Publish Date')}</Text>
           <Text strong>{singleState.publishDate}</Text>
         </Space>
         <Space direction="horizontal">
-          <Text type="secondary">Status</Text>
+          <Text type="secondary">{t('Status')}</Text>
           <Text strong>{singleState.status}</Text>
         </Space>
         <Space />

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Button, Space, Table, Typography, Popconfirm } from 'antd';
 import { EditFilled, EyeOutlined, DeleteOutlined } from '@ant-design/icons';
 import { inject, observer } from 'mobx-react';
+import { useTranslation } from 'react-i18next';
 
 /**ARTICLE IMPORTS */
 import { ArticleController } from '@app_modules/ArticleManagement/controller';
@@ -9,6 +10,7 @@ import ArticleMobileView from './ArticleMobileView';
 
 function ArticleTable({ store, form }) {
   const { Text } = Typography;
+  const { t } = useTranslation('common');
   const {
     getArticles,
     handleToggleShowFormModal,
@@ -22,7 +24,7 @@ function ArticleTable({ store, form }) {
   const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'short', timeStyle: 'short' });
   const columns = [
     {
-      title: 'Articles',
+      title: t('Articles'),
       render: (articleData) => (
         <ArticleMobileView
           articleData={articleData}
@@ -34,7 +36,7 @@ function ArticleTable({ store, form }) {
       responsive: ['xs']
     },
     {
-      title: 'Title'.toUpperCase(),
+      title: t('Title').toUpperCase(),
       dataIndex: 'title',
       width: '50%',
       render: (text) => <>{text}</>,
@@ -43,7 +45,7 @@ function ArticleTable({ store, form }) {
       responsive: ['sm', 'md', 'lg', 'xl']
     },
     {
-      title: 'User'.toUpperCase(),
+      title: t('User').toUpperCase(),
       dataIndex: 'Users',
       shouldCellUpdate: (prev, next) => JSON.stringify(prev) !== JSON.stringify(next),
       sorter: (a, b) =>
@@ -58,7 +60,7 @@ function ArticleTable({ store, form }) {
       }
     },
     {
-      title: 'Publish Date'.toUpperCase(),
+      title: t('Publish Date').toUpperCase(),
       dataIndex: 'publishDate',
       sorter: (a, b) => a.publishDate.toLowerCase().localeCompare(b.publishDate.toLowerCase()),
       responsive: ['xl'],
@@ -68,13 +70,13 @@ function ArticleTable({ store, form }) {
       }
     },
     {
-      title: 'Status'.toUpperCase(),
+      title: t('Status').toUpperCase(),
       dataIndex: 'status',
       shouldCellUpdate: (prev, next) => JSON.stringify(prev) !== JSON.stringify(next),
       responsive: ['xl']
     },
     {
-      title: 'Action'.toUpperCase(),
+      title: t('Action').toUpperCase(),
       dataIndex: 'action',
       responsive: ['sm', 'md', 'lg', 'xl'],
       fixed: 'right',
@@ -100,12 +102,12 @@ function ArticleTable({ store, form }) {
             />
             <Popconfirm
               placement="topRight"
-              title={`Are you sure to delete this Article?`}
+              title={t('Are you sure to delete this Article?')}
               onConfirm={() => {
                 handleToggleShowDeleteModal(articleData);
               }}
-              okText="Yes"
-              cancelText="No"
+              okText={t('Yes')}
+              cancelText={t('No')}
             >
               <Button icon={<DeleteOutlined />} type="link" style={{ color: '#9B2311' }} />
             </Popconfirm>
