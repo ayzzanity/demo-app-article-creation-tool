@@ -25,7 +25,7 @@ const CommentsController = ({ store, form }) => {
       form.resetFields();
     }
   };
-  // DELETING ARTICLE
+  //DELETING COMMENT
   const handleDeleteComment = async (commentId) => {
     let [successMessage, error] = await store.comments['DELETE'](commentId);
     await _showresultMessage(error, {

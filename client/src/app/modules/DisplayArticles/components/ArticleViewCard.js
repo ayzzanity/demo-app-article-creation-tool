@@ -3,11 +3,13 @@ import { inject, observer } from 'mobx-react';
 
 /**APP IMPORTS */
 import { ArticleImage } from '@app_modules/DisplayArticles/components';
+import { DateFormatter } from '@app_common/';
 
 const ArticleViewCard = ({ store }) => {
   const { single, loading } = store.display;
   const { Title } = Typography;
-  const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
+  const { formatDate } = DateFormatter('long', 'long');
+
   return (
     <Card
       loading={loading}
@@ -17,7 +19,7 @@ const ArticleViewCard = ({ store }) => {
       <br />
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Title level={4}>
-          Published {single.publishDate && formatter.format(Date.parse(single.publishDate))} by{' '}
+          Published {single.publishDate && formatDate(single.publishDate)} by{' '}
           {single.User.first_name} {single.User.last_name}
         </Title>
       </div>

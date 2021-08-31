@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 
 /**APP IMPORTS */
 import { ArticleImage } from '@app_modules/DisplayArticles/components';
+import { DateFormatter } from '@app_common/';
 import Routes from '@app_routing/Routes';
 
 const ArticleCard = ({ store, article }) => {
   const { display } = store;
   const { Meta } = Card;
-  const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'short', timeStyle: 'short' });
+  const { formatDate } = DateFormatter('short', 'short');
   return (
     <Card
       hoverable
@@ -20,7 +21,7 @@ const ArticleCard = ({ store, article }) => {
       <Meta
         title={article.title}
         description={`By ${article.User.first_name} ${article.User.last_name} [${
-          article.publishDate && formatter.format(Date.parse(article.publishDate))
+          article.publishDate && formatDate(article.publishDate)
         }]`}
       />
       <div style={{ marginTop: 20, marginBottom: 15, height: 50, overflow: 'hidden' }}>

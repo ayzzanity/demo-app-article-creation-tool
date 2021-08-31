@@ -5,8 +5,9 @@ import { inject, observer } from 'mobx-react';
 import { useTranslation } from 'react-i18next';
 
 /**ARTICLE IMPORTS */
+import { DateFormatter } from '@app_common/';
 import { ArticleController } from '@app_modules/ArticleManagement/controller';
-import ArticleMobileView from './ArticleMobileView';
+import { ArticleMobileView } from '@app_modules/ArticleManagement/components';
 
 function ArticleTable({ store, form }) {
   const { Text } = Typography;
@@ -18,10 +19,10 @@ function ArticleTable({ store, form }) {
     handleToggleShowDeleteModal,
     onChangePage
   } = ArticleController({ store, form });
-
+  const { formatDate } = DateFormatter('short', 'short');
   // eslint-disable-next-line
   useEffect(getArticles, []);
-  const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'short', timeStyle: 'short' });
+
   const columns = [
     {
       title: t('Articles'),
@@ -66,7 +67,7 @@ function ArticleTable({ store, form }) {
       responsive: ['xl'],
       shouldCellUpdate: (prev, next) => JSON.stringify(prev) !== JSON.stringify(next),
       render: (text) => {
-        return <Text>{text === 'N/A' ? text : formatter.format(Date.parse(text))}</Text>;
+        return <Text>{text === 'N/A' ? text : formatDate(text)}</Text>;
       }
     },
     {

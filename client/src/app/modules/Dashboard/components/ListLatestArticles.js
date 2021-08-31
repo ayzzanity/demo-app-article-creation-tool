@@ -1,7 +1,8 @@
 import { List, Avatar } from 'antd';
+import { DateFormatter } from '@app_common/';
 
 const ListLatestArticles = ({ data }) => {
-  const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'short', timeStyle: 'short' });
+  const { formatDate } = DateFormatter('medium', 'short');
   return (
     <List
       size="small"
@@ -14,8 +15,8 @@ const ListLatestArticles = ({ data }) => {
             title={item.title}
             description={
               item.status === 'Published'
-                ? formatter.format(Date.parse(item.publishDate))
-                : formatter.format(Date.parse(item.createdAt))
+                ? formatDate(item.publishDate)
+                : formatDate(item.createdAt)
             }
           />
         </List.Item>
