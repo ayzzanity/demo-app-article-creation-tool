@@ -18,7 +18,7 @@ const ArticleViewCard = ({ store }) => {
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Title level={4}>
           Published {single.publishDate && formatter.format(Date.parse(single.publishDate))} by{' '}
-          {single.Users.first_name} {single.Users.last_name}
+          {single.User.first_name} {single.User.last_name}
         </Title>
       </div>
       <br />

@@ -3,10 +3,14 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 
 /**APP IMPORTS */
-import { ArticleManagement } from '@app_modules/ArticleManagement/view';
-import { DisplayArticles, DisplayArticle } from '@app_modules/DisplayArticles/view';
-import { Dashboard } from '@app_modules/Dashboard/view';
-import { NavBar } from '@app_modules/Layout';
+import {
+  ArticleManagement,
+  Comments,
+  Dashboard,
+  DisplayArticles,
+  DisplayArticle,
+  NavBar
+} from '@app_modules/';
 import { PublicRoute } from '@app_routing/';
 
 /**APP CORE */
@@ -20,7 +24,6 @@ import {
   AdminSettings,
   AdminLayout,
   SignInLayout,
-  // Dashboard,
   UserManagement,
   Login,
   ResetPassword,
@@ -28,7 +31,6 @@ import {
   Error404,
   Translation
 } from '@core_modules/';
-import UserActivityTable from '@core_modules/Dashboard/components/UserActivityTable';
 
 function App({ store }) {
   let { login } = store;
@@ -113,7 +115,15 @@ function App({ store }) {
               allowed={['Administrator']}
               Layout={AdminLayout}
             />
-
+            <PrivateRoute
+              exact
+              path={Routes.COMMENTS_ROUTE}
+              allowed={['Administrator']}
+              isAuthorized={true}
+              login={login}
+              Component={Comments}
+              Layout={AdminLayout}
+            />
             <PublicRoute
               exact
               path={Routes.ARTICLES_ROUTE}

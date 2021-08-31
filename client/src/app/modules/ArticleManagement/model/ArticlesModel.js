@@ -11,7 +11,7 @@ const ArticlesModel = types
     imageHeader: types.optional(types.string, ''),
     publishDate: types.optional(types.string, ''),
     status: types.optional(types.string, ''),
-    Users: types.optional(UsersModel, {})
+    User: types.optional(UsersModel, {})
   })
   .views((self) => ({}))
   .actions((self) => ({

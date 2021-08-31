@@ -16,6 +16,9 @@ export default types
   })
   .actions((self) => ({
     ...ApplyRootCrud(API_PATH, self),
-    ...AdditionalCrud(API_PATH, self)
+    ...AdditionalCrud(API_PATH, self),
+    emptyArticle() {
+      self.single = {};
+    }
   }))
   .views((self) => ({}));

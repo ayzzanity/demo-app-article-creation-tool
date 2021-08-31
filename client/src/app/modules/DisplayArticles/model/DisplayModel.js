@@ -11,20 +11,9 @@ const DisplayModel = types
     imageHeader: types.optional(types.string, ''),
     publishDate: types.optional(types.string, ''),
     status: types.optional(types.string, ''),
-    Users: types.optional(UsersModel, {})
+    User: types.optional(UsersModel, {})
   })
   .views((self) => ({}))
-  .actions((self) => ({
-    emptyArticle() {
-      self.id = 0;
-      self.key = 0;
-      self.user_article_id = '';
-      self.title = '';
-      self.content = '';
-      self.imageHeader = '';
-      self.publishDate = '';
-      self.status = '';
-    }
-  }));
+  .actions((self) => ({}));
 
 export default DisplayModel;

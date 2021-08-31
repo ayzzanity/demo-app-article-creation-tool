@@ -8,6 +8,7 @@ const ApplyRootCrud = (apiPath, self) => {
         self.isCreating = true;
         const { data } = yield axios.post(apiPath, values);
         self.state.push(data);
+        self.total = self.total + 1;
         self.isCreating = false;
 
         return [{ message: 'Created', data }, null];
@@ -73,6 +74,7 @@ const ApplyRootCrud = (apiPath, self) => {
         data: { ids: [id] }
       });
       if (data) {
+        self.total = self.total - 1;
         self.state.splice(
           self.state.findIndex((data) => data.id === id),
           1

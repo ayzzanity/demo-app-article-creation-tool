@@ -16,7 +16,7 @@ const DisplayController = ({ store }) => {
   };
   //CLEAR ARTICLES
   const clearArticle = () => {
-    display.single.emptyArticle();
+    display.emptyArticle();
   };
   //ON PAGE CHANGE
   const onChangePage = (value) => {

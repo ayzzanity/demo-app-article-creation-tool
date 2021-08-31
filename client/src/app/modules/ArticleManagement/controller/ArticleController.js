@@ -80,7 +80,7 @@ const ArticleController = ({ store, form }) => {
     setToggleShowViewModal();
     setViewArticle(article);
     setContent(article.content);
-    article.Users && store.users.single.setUser(article.Users);
+    article.User && store.users.single.setUser(article.User);
   };
   //TOGGLE SHOW DELETE MODAL
   const handleToggleShowDeleteModal = (article) => {

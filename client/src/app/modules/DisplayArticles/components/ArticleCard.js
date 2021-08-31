@@ -19,7 +19,7 @@ const ArticleCard = ({ store, article }) => {
     >
       <Meta
         title={article.title}
-        description={`By ${article.Users.first_name} ${article.Users.last_name} [${
+        description={`By ${article.User.first_name} ${article.User.last_name} [${
           article.publishDate && formatter.format(Date.parse(article.publishDate))
         }]`}
       />

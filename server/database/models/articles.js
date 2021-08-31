@@ -9,8 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Articles.User = Articles.belongsTo(models.Users, {
-        as: 'Users',
+        as: 'User',
         foreignKey: 'user_article_id'
+      });
+      Articles.Comment = Articles.hasMany(models.Comments, {
+        as: 'Comments',
+        foreignKey: 'comment_article_id'
       });
     }
   }

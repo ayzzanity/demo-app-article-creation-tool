@@ -43,6 +43,43 @@ const AdditionalCrud = (apiPath, self) => {
         console.log(error);
         return [null, error];
       }
+    }),
+    GET_ARTICLES_BY_USER: flow(function* (id) {
+      try {
+        const {
+          data: { data }
+        } = yield axios.get(apiPath);
+
+        const dataWithKey = data.map((d) => ({ ...d, key: d.id }));
+        const dataFiltered = dataWithKey.filter((data) => {
+          return data.user_article_id === id;
+        });
+        const dataSortedByDate = dataFiltered
+          .slice()
+          .sort((a, b) => b.publishDate.toLowerCase().localeCompare(a.publishDate.toLowerCase()));
+        self.state = cast(dataSortedByDate);
+        self.total = cast(dataFiltered.length);
+      } catch (error) {
+        console.log(error);
+        return [null, error];
+      }
+    }),
+    GET_COMMENTS_BY_ID: flow(function* (id) {
+      try {
+        const {
+          data: { data }
+        } = yield axios.get(apiPath);
+
+        const dataWithKey = data.map((d) => ({ ...d, key: d.id }));
+        const dataFiltered = dataWithKey.filter((data) => {
+          return data.comment_article_id === id;
+        });
+        self.state = cast(dataFiltered);
+        self.total = cast(dataFiltered.length);
+      } catch (error) {
+        console.log(error);
+        return [null, error];
+      }
     })
   };
 };

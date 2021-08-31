@@ -4,7 +4,6 @@ import CountryData from '@core_data/countries/Countries.json';
 const UserManagementController = ({ store, form, t }) => {
   const getUsers = async () => {
     const page = 1;
-
     const search = store.UserManagementUtilities.search;
     const props = store.UserManagementUtilities.props;
     let params = { page, search, props };

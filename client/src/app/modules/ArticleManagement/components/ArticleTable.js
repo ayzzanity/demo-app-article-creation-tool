@@ -46,10 +46,10 @@ function ArticleTable({ store, form }) {
     },
     {
       title: t('User').toUpperCase(),
-      dataIndex: 'Users',
+      dataIndex: 'User',
       shouldCellUpdate: (prev, next) => JSON.stringify(prev) !== JSON.stringify(next),
       sorter: (a, b) =>
-        a.Users.first_name.toLowerCase().localeCompare(b.Users.first_name.toLowerCase()),
+        a.User.first_name.toLowerCase().localeCompare(b.User.first_name.toLowerCase()),
       responsive: ['sm', 'md', 'lg', 'xl'],
       render: (row) => {
         return (

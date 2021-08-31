@@ -2,7 +2,7 @@ import { Routes } from '@core_routing/';
 
 const LayoutController = ({ store, history, setSelectedKeys }) => {
   const setLanguage = async (locale) => {
-    console.log(locale, 'sdfsdf');
+    console.log(locale);
     await store.globalState.setLanguage(locale);
   };
 
@@ -26,6 +26,8 @@ const LayoutController = ({ store, history, setSelectedKeys }) => {
       setSelectedKeys(['2']);
     } else if (history.location.pathname === Routes.ARTICLE_MANAGEMENT_ROUTE) {
       setSelectedKeys(['3']);
+    } else if (history.location.pathname === Routes.COMMENTS_ROUTE) {
+      setSelectedKeys(['4']);
     }
   };
 
