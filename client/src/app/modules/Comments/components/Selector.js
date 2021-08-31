@@ -17,6 +17,12 @@ const Selector = ({ store }) => {
             getUserArticle(id);
             setValue(null);
           }}
+          showSearch
+          filterOption={(input, option) => {
+            const [fname, , lname] = option.children;
+            const name = `${fname} ${lname}`;
+            return name.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+          }}
         >
           {store.users.state.map((_u) => (
             <Option key={_u.id} value={_u.id}>
@@ -32,6 +38,10 @@ const Selector = ({ store }) => {
             getCommentsById(value);
             setValue(value);
           }}
+          showSearch
+          filterOption={(input, option) =>
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
         >
           {store.articles.state &&
             store.articles.state.map((_a) => (

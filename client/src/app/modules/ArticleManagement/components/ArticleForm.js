@@ -60,13 +60,17 @@ function ArticleForm({ store, form }) {
                   className="w-100"
                   name="title"
                   label={t('Article Title')}
-                  //rules={[required('Please enter a title!')]}
+                  rules={[{ required: true, message: 'Please enter a title!' }]}
                 >
                   <Input placeholder={t('Article Title')} />
                 </Form.Item>
               </Col>
               <Col {...TWO_GRID_ONETHIRD}>
-                <Form.Item name="status" label={t('Status')}>
+                <Form.Item
+                  name="status"
+                  label={t('Status')}
+                  rules={[{ required: true, message: 'Please set status!' }]}
+                >
                   <Select>
                     <Option key="draft" value="Draft">
                       {t('Draft')}
@@ -80,11 +84,6 @@ function ArticleForm({ store, form }) {
               </Col>
               <Col {...TWO_GRID_TWOTHIRD}>
                 <Form.Item name="content" label={t('Content')} className="w-200">
-                  {/* <Input.TextArea
-                    className="w-100"
-                    placeholder="Content"
-                    autoSize={{ minRows: 10, maxRows: 18 }}
-                  /> */}
                   <TextEditor />
                 </Form.Item>
               </Col>
@@ -92,9 +91,17 @@ function ArticleForm({ store, form }) {
                 <Form.Item
                   name="user_article_id"
                   label={t('Assign User')}
-                  // rules={[required('Please assign a user!')]}
+                  rules={[{ required: true, message: 'Please assign user!' }]}
                 >
-                  <Select placeholder={t('Please select type')} showSearch={true}>
+                  <Select
+                    placeholder={t('Please select user')}
+                    showSearch
+                    filterOption={(input, option) => {
+                      const [fname, , lname] = option.children;
+                      const name = `${fname} ${lname}`;
+                      return name.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+                    }}
+                  >
                     {store.users.state.map((user) => (
                       <Option key={user.id} value={user.id}>
                         {user.first_name} {user.last_name}
