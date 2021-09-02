@@ -1,22 +1,17 @@
-import { Loading } from '@app_common/';
-import { Card, Row, Col, Typography, Button, Popconfirm, Divider } from 'antd';
+import { Row, Col, Typography, Button, Popconfirm, Divider } from 'antd';
 import { CloseCircleOutlined } from '@ant-design/icons';
 import { inject, observer } from 'mobx-react';
 
 import { CommentsController } from '@app_modules/Comments/controller';
 import { DateFormatter } from '@app_common';
 
-const CommentDisplay = ({ store }) => {
+const Comments = ({ store }) => {
   const { handleDeleteComment } = CommentsController({ store });
   const { Title, Text } = Typography;
   const { formatDate } = DateFormatter('long', 'long');
-
   return (
-    <Card style={{ marginTop: 10 }} title={`Comment List (${store.comments.total})`}>
-      {store.comments.loading ? (
-        <Loading />
-      ) : (
-        store.comments.state &&
+    <>
+      {store.comments.state &&
         store.comments.state.map((_c) => (
           <Row>
             <Col span={23}>
@@ -40,10 +35,9 @@ const CommentDisplay = ({ store }) => {
               <Divider />
             </Col>
           </Row>
-        ))
-      )}
-    </Card>
+        ))}
+    </>
   );
 };
 
-export default inject('store')(observer(CommentDisplay));
+export default inject('store')(observer(Comments));

@@ -10,6 +10,7 @@ import { ExactTitle } from '@core_common/components';
 import { ArticleController } from '@app_modules/ArticleManagement/controller';
 import { DisplayController } from '@app_modules/DisplayArticles/controller';
 import { CardStats, DraftList, PublishedList } from '@app_modules/Dashboard/components';
+import { Loading } from '@app_common/';
 
 const Dashboard = ({ store }) => {
   const { t } = useTranslation('common');
@@ -24,13 +25,17 @@ const Dashboard = ({ store }) => {
   return (
     <div>
       <ExactTitle level={3} text={t('Dashboard')} />
-      <Card loading={store.articles.loading}>
-        <Row>
-          <CardStats title="Total Users:" text={store.users.total} />
-          <CardStats title="Total Articles:" text={store.articles.total} />
-          <CardStats title="Published Articles:" text={store.display.sorted.length} />
-          <CardStats title="Drafted Articles:" text={store.articles.sorted.length} />
-        </Row>
+      <Card>
+        {store.users.loading && store.articles.loading && store.display.loading ? (
+          <Loading />
+        ) : (
+          <Row>
+            <CardStats title="Total Users:" text={store.users.total} />
+            <CardStats title="Total Articles:" text={store.articles.total} />
+            <CardStats title="Published Articles:" text={store.display.sorted.length} />
+            <CardStats title="Drafted Articles:" text={store.articles.sorted.length} />
+          </Row>
+        )}
       </Card>
       <Row>
         <PublishedList />

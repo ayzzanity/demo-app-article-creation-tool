@@ -5,6 +5,7 @@ const AdditionalCrud = (apiPath, self) => {
   return {
     GET_PUBLISHED: flow(function* (params) {
       try {
+        self.loading = true;
         const {
           data: { data }
         } = yield axios.get(apiPath, { params });
@@ -19,6 +20,7 @@ const AdditionalCrud = (apiPath, self) => {
 
         self.state = cast(dataFiltered);
         self.sorted = cast(dataSortedByDate);
+        self.loading = false;
       } catch (error) {
         console.log(error);
         return [null, error];
@@ -26,6 +28,7 @@ const AdditionalCrud = (apiPath, self) => {
     }),
     GET_DRAFTS: flow(function* (params) {
       try {
+        self.loading = true;
         const {
           data: { data }
         } = yield axios.get(apiPath, { params });
@@ -39,6 +42,7 @@ const AdditionalCrud = (apiPath, self) => {
           .sort((a, b) => b.publishDate.toLowerCase().localeCompare(a.publishDate.toLowerCase()));
 
         self.sorted = cast(dataSortedByDate);
+        self.loading = false;
       } catch (error) {
         console.log(error);
         return [null, error];
@@ -46,6 +50,7 @@ const AdditionalCrud = (apiPath, self) => {
     }),
     GET_ARTICLES_BY_USER: flow(function* (id) {
       try {
+        self.loading = true;
         const {
           data: { data }
         } = yield axios.get(apiPath);
@@ -59,6 +64,7 @@ const AdditionalCrud = (apiPath, self) => {
           .sort((a, b) => b.publishDate.toLowerCase().localeCompare(a.publishDate.toLowerCase()));
         self.state = cast(dataSortedByDate);
         self.total = cast(dataFiltered.length);
+        self.loading = false;
       } catch (error) {
         console.log(error);
         return [null, error];
@@ -66,6 +72,7 @@ const AdditionalCrud = (apiPath, self) => {
     }),
     GET_COMMENTS_BY_ID: flow(function* (id) {
       try {
+        self.loading = true;
         const {
           data: { data }
         } = yield axios.get(apiPath);
@@ -76,6 +83,7 @@ const AdditionalCrud = (apiPath, self) => {
         });
         self.state = cast(dataFiltered);
         self.total = cast(dataFiltered.length);
+        self.loading = false;
       } catch (error) {
         console.log(error);
         return [null, error];

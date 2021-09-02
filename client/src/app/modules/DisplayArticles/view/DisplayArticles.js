@@ -12,6 +12,7 @@ import {
   ArticlePagination
 } from '@app_modules/DisplayArticles/components';
 import { DisplayController } from '@app_modules/DisplayArticles/controller';
+import { Loading } from '@app_common/';
 import './styles.css';
 
 const DisplayArticles = ({ store }) => {
@@ -24,20 +25,26 @@ const DisplayArticles = ({ store }) => {
     <div className="background">
       <div style={{ width: '85%', margin: '2rem auto' }}>
         <ArticleDisplayHeader />
-        <Row gutter={[32, 16]}>
-          {sorted.slice(minValue, maxValue).map((article) => {
-            return (
-              <Space>
-                <Col key={article.key} {...THREE_GRID}>
-                  <ArticleCard article={article} />
-                </Col>
-              </Space>
-            );
-          })}
-          <Col span={ANTD_MAX_COL}>
-            <ArticlePagination />
-          </Col>
-        </Row>
+        {store.display.loading ? (
+          <Loading />
+        ) : (
+          <>
+            <Row gutter={[32, 16]}>
+              {sorted.slice(minValue, maxValue).map((article) => {
+                return (
+                  <Space>
+                    <Col key={article.key} {...THREE_GRID}>
+                      <ArticleCard article={article} />
+                    </Col>
+                  </Space>
+                );
+              })}
+              <Col span={ANTD_MAX_COL}>
+                <ArticlePagination />
+              </Col>
+            </Row>
+          </>
+        )}
       </div>
       <BackTop target={() => document.getElementsByClassName('background')[0]} />
     </div>
